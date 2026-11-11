@@ -1,0 +1,56 @@
+E28 projects/operator-n-travel/evidence.md:671
+O3 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:46
+C1 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:86
+C3 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:100
+Q1 projects/operator-n-travel/tasks/01-travel-esim/questions.md:25
+Q4 projects/operator-n-travel/tasks/01-travel-esim/questions.md:53
+projects/operator-n-travel/tasks/01-travel-esim/out/options.md:22 ## Варианты
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:16 ## Аудитория и её работа
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:59 ## Ценность, затраты и доход
+projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:18 ## Что известно
+projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:84 ## Выводы
+projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:142 ## Противоречия
+projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:148 ## Чего не знаем
+D1 projects/operator-n-travel/decisions.md:3
+projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:44 ## Роль каналов
+projects/operator-n-travel/tasks/01-travel-esim/out/options.md:91 ## Рекомендация
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:8 ## Суть
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:39 ## Выбранное направление
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:51 ## Сознательные отказы
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:73 ## Риски и допущения
+O4 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:57
+C6 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:121
+projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:8 ## Коротко
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:20 ## Почему
+O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:35
+projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:8 ## Суть
+projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:30 ## Ключевое сообщение и доказательство
+projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:58 ## Сверка обещаний с продуктом
+projects/operator-n-travel/tasks/01-travel-esim/out/options.md:8 ## Критерии выбора
+projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:28 ## Альтернативы
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:27 ## Что отвергнуто
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:54 ## База сравнения
+K1 projects/operator-n-travel/decisions.md:18
+K2 projects/operator-n-travel/decisions.md:26
+K3 projects/operator-n-travel/decisions.md:34
+K4 projects/operator-n-travel/decisions.md:42
+K5 projects/operator-n-travel/decisions.md:50
+K6 projects/operator-n-travel/decisions.md:58
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:11 ## Рекомендация
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:34 ## Что делать дальше
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:60 ## Сколько стоила работа
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:8 ## Что проверяем
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:66 ## Срок наблюдения
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:92 ## Правило решения
+O5 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:68
+C2 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:93
+Q2 projects/operator-n-travel/tasks/01-travel-esim/questions.md:34
+projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:16 ## Аудитория и ситуация
+C4 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:107
+Q5 projects/operator-n-travel/tasks/01-travel-esim/questions.md:62
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:32 ## Ожидаемое изменение
+projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:80 ## Нежелательные последствия
+O1 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24
+projects/operator-n-travel/tasks/01-travel-esim/out/options.md:79 ## Сравнение
+projects/operator-n-travel/tasks/01-travel-esim/out/scale-and-journey.md:5 ## Масштаб
+projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:52 ## Чего не знаем
