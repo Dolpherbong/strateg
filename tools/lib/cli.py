@@ -117,7 +117,8 @@ def _records(root: Path, project: Path, args: argparse.Namespace) -> tuple[tuple
     selected = find(data, args.words, args.letter, args.kind, args.status)
     lines = []
     for record in selected:
-        lines.extend((f"{record.path.relative_to(root).as_posix()}:{record.line}", record.text.rstrip()))
+        text = "\n".join(record.text.rstrip().splitlines())
+        lines.extend((f"{record.path.relative_to(root).as_posix()}:{record.line}", text))
     return tuple(lines) if lines else ("Записи не найдены",), 0
 
 
