@@ -1,0 +1,133 @@
+"""Поиск, зависимости и сводка состояния."""
+
+from collections import Counter, deque
+from datetime import date
+from pathlib import Path
+import re
+
+from .records import ID_PATTERN, Project, Record, fields, read, references, sections
+from .workspace import within
+
+
+def find(data: Project, words: list[str], letter: str | None = None,
+         kind: str | None = None, status: str | None = None) -> tuple[Record, ...]:
+    """Отбирает записи по номеру, всем словам и полям.
+
+    Args:
+        data: Снимок проекта.
+        words: Номер либо слова поиска.
+        letter: Вид записи.
+        kind: Вид сведения.
+        status: Статус записи.
+
+    Returns:
+        Подходящие записи в порядке файлов и строк.
+    """
+    query = " ".join(words).strip()
+    if not query and not any((letter, kind, status)):
+        raise ValueError("Укажите номер, слова или отбор для find")
+    exact = query if re.fullmatch(ID_PATTERN, query) else None
+    result = []
+    for record in data.records:
+        if letter and record.id[0] != letter or kind and record.fields.get("вид") != kind:
+            continue
+        if status and record.fields.get("статус") != status:
+            continue
+        if exact and record.id != exact:
+            continue
+        if not exact and any(word.casefold() not in record.visible.casefold() for word in query.split()):
+            continue
+        result.append(record)
+    return tuple(result)
+
+
+def impact(data: Project, number: str, root: Path) -> tuple[str, ...]:
+    """Показывает зависимые записи и разделы по уровням.
+
+    Args:
+        data: Снимок проекта.
+        number: Исходная запись.
+        root: Корень для относительных путей.
+
+    Returns:
+        Строки обхода в ширину без повторов и циклов.
+    """
+    ids = {record.id for record in data.records}
+    if number not in ids:
+        raise ValueError(f"Нет записи: {number}")
+    nodes = [(r.id, f"{r.id} {r.path.relative_to(root).as_posix()}:{r.line}", r.refs) for r in data.records]
+    for path, text in data.documents.items():
+        if path.parent.name == "out":
+            for section in sections(text):
+                label = f"{path.relative_to(root).as_posix()}:{section.line} ## {section.title}"
+                nodes.append((label, label, references(section.text)))
+    queue, seen, lines = deque([(number, 0)]), {number}, [f"Зависимости {number}"]
+    while queue:
+        current, level = queue.popleft()
+        for key, label, refs in nodes:
+            if current in refs and key not in seen:
+                seen.add(key)
+                queue.append((key, level + 1))
+                lines.append(f"Уровень {level + 1}: {label}")
+    return tuple(lines if len(lines) > 1 else [*lines, "Зависимых записей и разделов нет"])
+
+
+def _overdue(record: Record, today: str) -> str | None:
+    letter, values = record.id[0], record.fields
+    key = "срок" if letter == "K" else "срок проверки"
+    expected = "открыто" if letter == "K" else "действует"
+    deadline = values.get(key, "")
+    if letter not in "KD" or values.get("статус") != expected:
+        return None
+    try:
+        parsed = date.fromisoformat(deadline)
+    except ValueError:
+        return f"{record.id}: неверная дата «{key}», запустите check"
+    return f"Просрочено {record.id}: {deadline}" if parsed.isoformat() < today else None
+
+
+def status(project: Path, task: Path, data: Project) -> tuple[str, ...]:
+    """Печатает состояние, счётчики и просроченные проверки.
+
+    Args:
+        project: Каталог проекта.
+        task: Каталог задачи.
+        data: Снимок всех реестров проекта.
+
+    Returns:
+        Строки сводки.
+    """
+    state = fields(read(within(task, task / "STATE.md")))[0]
+    lines = [f"Проект: {project.name}", f"Задача: {task.name}"]
+    for key in ("этап", "статус", "следующий шаг", "ждём от человека"):
+        lines.append(f"{key}: {state.get(key) or 'не указано'}")
+    counts = Counter((r.id[0], r.fields.get("вид", ""), r.fields.get("статус", "без статуса")) for r in data.records)
+    for (letter, kind, record_status), count in sorted(counts.items()):
+        lines.append(f"Записи {letter}{' ' + kind if kind else ''}, {record_status}: {count}")
+    for record in data.records:
+        if record.id.startswith("Q") and record.fields.get("статус") == "открыт":
+            lines.append(f"Открыт {record.id}: {record.fields.get('вопрос', '')}")
+        message = _overdue(record, date.today().isoformat())
+        if message:
+            lines.append(message)
+    return tuple(lines)
+
+
+def inventory(root: Path) -> tuple[str, ...]:
+    """Перечисляет проекты и задачи при отсутствии активной задачи.
+
+    Args:
+        root: Корень репозитория.
+
+    Returns:
+        Строки перечня.
+    """
+    lines = ["Активной задачи нет"]
+    parent = within(root, root / "projects")
+    for project in sorted(parent.iterdir()) if parent.exists() else ():
+        within(root, project)
+        if project.is_dir():
+            tasks = within(root, project / "tasks")
+            names = [p.name for p in sorted(tasks.iterdir()) if within(root, p).is_dir()] if tasks.exists() else []
+            lines.append(f"Проект {project.name}: {', '.join(names) or 'задач нет'}")
+    return tuple(lines)
