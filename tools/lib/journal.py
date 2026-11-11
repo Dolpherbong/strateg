@@ -122,6 +122,20 @@ def _total(rows: list[tuple[str, ...]], price: Decimal | None) -> str:
     return f"шагов: {len(rows)}; мин: {amounts[0]}; ток., тыс.: {amounts[1]}; ₽: {amounts[2]}{suffix}"
 
 
+def _clock(rows: list[tuple[str, ...]]) -> str:
+    stamps = []
+    for row in rows:
+        try:
+            stamps.append(datetime.strptime(row[1], "%Y-%m-%d %H:%M"))
+        except ValueError:
+            continue
+    if len(stamps) < 2:
+        return "По часам: меньше двух отметок времени"
+    first, last = min(stamps), max(stamps)
+    minutes = int((last - first).total_seconds() // 60)
+    return f"По часам: с {first:%Y-%m-%d %H:%M} по {last:%Y-%m-%d %H:%M}, {minutes} мин"
+
+
 def cost(task: Path, price: Decimal | None = None) -> tuple[str, ...]:
     """Summarize journal totals by stage and tool.
 
@@ -139,4 +153,5 @@ def cost(task: Path, price: Decimal | None = None) -> tuple[str, ...]:
             group = [row for row in rows if row[column] == key]
             lines.append(f"{label} {key}: {_total(group, price)}")
     lines.append(f"Сбоев: {sum(row[10] == 'сбой' for row in rows)}")
+    lines.append(_clock(rows))
     return tuple(lines)
