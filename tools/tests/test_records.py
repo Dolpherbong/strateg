@@ -1,4 +1,4 @@
-"""Проверки общего разбора записей и ссылок."""
+"""Verify records.py."""
 
 from pathlib import Path
 import tempfile
@@ -8,10 +8,10 @@ from tools.tests.fixtures import record, write
 
 
 class RecordsTests(unittest.TestCase):
-    """Проверяет границы записей, маскирование и ссылки."""
+    """Check record parsing, numbering, and references."""
 
     def test_comments_code_and_lines(self) -> None:
-        """Образцы не становятся записями, номера строк сохраняются."""
+        """Verify comments code and lines."""
         from tools.lib.records import parse_records
         text = ("<!--\n### E99\n-->\n```md\n### E98\n```\n~~~\n### E97\n~~~\n"
                 "### E1 Название\n- ТЕКСТ : Цена: 450 [E2, C3]\n- источник: S1\n"
@@ -24,14 +24,14 @@ class RecordsTests(unittest.TestCase):
         self.assertNotIn("E44", records[0].text)
 
     def test_reference_syntax(self) -> None:
-        """Ссылки отличаются от номеров в тексте и пометок."""
+        """Verify reference syntax."""
         from tools.lib.records import references
         text = ("- источник: свой\n- основание: E1, E2\n- текст: E77 [гипотеза] [C3, E4]\n"
                 "- где: https://example.org/E88\n<!-- [E90] -->\n```\n[E91]\n```\n")
         self.assertEqual(set(references(text)), {"E1", "E2", "C3", "E4"})
 
     def test_sections_and_nested_headings(self) -> None:
-        """Раздел включает записи, но заканчивается перед следующим разделом."""
+        """Verify sections and nested headings."""
         from tools.lib.records import sections
         result = sections("# Тест\n## Первый\n<!-- скрыто -->\n### C1\n- опора: E1\n"
                           "## Второй\n```\n## Ложный\n```\nТекст\n# Конец\nне входит")
@@ -40,7 +40,7 @@ class RecordsTests(unittest.TestCase):
         self.assertNotIn("не входит", result[1].text)
 
     def test_project_scan_ignores_inbox(self) -> None:
-        """Обход видит все задачи и рабочие файлы, но не исходные материалы."""
+        """Verify project scan ignores inbox."""
         from tools.lib.records import load_project
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
             root = Path(folder)

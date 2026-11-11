@@ -1,4 +1,4 @@
-"""Повторяемый прогон всех команд в PowerShell или Git Bash на копии."""
+"""Run all commands in PowerShell or Git Bash on an isolated copy."""
 
 import argparse
 from pathlib import Path
@@ -69,18 +69,18 @@ def _final(root: Path, shell: str, log: Path) -> None:
 
 
 def main() -> int:
-    """Создаёт копию в dev/runs и сохраняет настоящий вывод оболочки.
+    """Run all commands on a temporary copy and save shell output.
 
     Returns:
-        Ноль после успешного прогона всех команд.
+        Exit code according to the command contract.
     """
     parser = argparse.ArgumentParser(description="Все команды в выбранной оболочке на учебной копии")
     parser.add_argument("--shell", choices=("powershell", "bash"), required=True)
+    parser.add_argument("--out", type=Path, help="папка для учебной копии и вывода; по умолчанию системная временная")
     args = parser.parse_args()
-    workspace = Path(__file__).resolve().parents[3]
-    runs = workspace / "dev/runs"
-    runs.mkdir(parents=True, exist_ok=True)
-    root = Path(tempfile.mkdtemp(prefix=f"t01-{args.shell}-", dir=runs)) / "учебный корень"
+    if args.out is not None:
+        args.out.mkdir(parents=True, exist_ok=True)
+    root = Path(tempfile.mkdtemp(prefix=f"t01-{args.shell}-", dir=args.out)) / "учебный корень"
     root.mkdir()
     prepare(root)
     shutil.copytree(Path(__file__).resolve().parents[1], root / "tools", ignore=shutil.ignore_patterns("__pycache__"))

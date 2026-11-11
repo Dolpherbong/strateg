@@ -1,4 +1,4 @@
-"""Поиск, зависимости и сводка состояния."""
+"""Search records, trace dependencies, and summarize status."""
 
 from collections import Counter, deque
 from datetime import date
@@ -11,17 +11,17 @@ from .workspace import within
 
 def find(data: Project, words: list[str], letter: str | None = None,
          kind: str | None = None, status: str | None = None) -> tuple[Record, ...]:
-    """Отбирает записи по номеру, всем словам и полям.
+    """Filter records by number, type, status, and words.
 
     Args:
-        data: Снимок проекта.
-        words: Номер либо слова поиска.
-        letter: Вид записи.
-        kind: Вид сведения.
-        status: Статус записи.
+        data: Parsed project snapshot.
+        words: Words that must all occur in the record.
+        letter: Record type letter.
+        kind: Evidence kind filter.
+        status: Record status filter.
 
     Returns:
-        Подходящие записи в порядке файлов и строк.
+        Matching records in file and line order.
     """
     query = " ".join(words).strip()
     if not query and not any((letter, kind, status)):
@@ -42,15 +42,15 @@ def find(data: Project, words: list[str], letter: str | None = None,
 
 
 def impact(data: Project, number: str, root: Path) -> tuple[str, ...]:
-    """Показывает зависимые записи и разделы по уровням.
+    """Trace dependent records and sections in breadth-first order.
 
     Args:
-        data: Снимок проекта.
-        number: Исходная запись.
-        root: Корень для относительных путей.
+        data: Parsed project snapshot.
+        number: Record identifier.
+        root: Repository root.
 
     Returns:
-        Строки обхода в ширину без повторов и циклов.
+        Dependency report lines for records and document sections.
     """
     ids = {record.id for record in data.records}
     if number not in ids:
@@ -87,15 +87,15 @@ def _overdue(record: Record, today: str) -> str | None:
 
 
 def status(project: Path, task: Path, data: Project) -> tuple[str, ...]:
-    """Печатает состояние, счётчики и просроченные проверки.
+    """Summarize state, open questions, and overdue commitments.
 
     Args:
-        project: Каталог проекта.
-        task: Каталог задачи.
-        data: Снимок всех реестров проекта.
+        project: Project directory or selected project name.
+        task: Task directory or selected task name.
+        data: Parsed project snapshot.
 
     Returns:
-        Строки сводки.
+        Status report lines.
     """
     state = fields(read(within(task, task / "STATE.md")))[0]
     lines = [f"Проект: {project.name}", f"Задача: {task.name}"]
@@ -114,13 +114,13 @@ def status(project: Path, task: Path, data: Project) -> tuple[str, ...]:
 
 
 def inventory(root: Path) -> tuple[str, ...]:
-    """Перечисляет проекты и задачи при отсутствии активной задачи.
+    """List projects and tasks when no active task is selected.
 
     Args:
-        root: Корень репозитория.
+        root: Repository root.
 
     Returns:
-        Строки перечня.
+        Project and task list lines.
     """
     lines = ["Активной задачи нет"]
     parent = within(root, root / "projects")

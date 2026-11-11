@@ -1,4 +1,4 @@
-"""Проверки всех команд через настоящий вход CLI."""
+"""Verify cli.py."""
 
 import os
 from pathlib import Path
@@ -11,10 +11,10 @@ from tools.tests.fixtures import clean, prepare, record, write
 
 
 class CliTests(unittest.TestCase):
-    """Проверяет коды завершения, вывод и запись файлов."""
+    """Check exit codes, output, and file changes for CLI commands."""
 
     def setUp(self) -> None:
-        """Создаёт отдельный корень для каждой проверки."""
+        """Create an isolated sample root with Cyrillic characters and spaces."""
         self.temp = tempfile.TemporaryDirectory(prefix="учебный проект ", dir=Path(__file__).parent)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
@@ -22,7 +22,7 @@ class CliTests(unittest.TestCase):
         prepare(self.root)
 
     def run_cli(self, *args: str, code: int = 0) -> str:
-        """Запускает команду и проверяет ожидаемый код завершения."""
+        """Run a command and capture output without a subprocess."""
         result = subprocess.run([sys.executable, str(self.script), *args, "--root", str(self.root)],
                                 capture_output=True, encoding="utf-8", env={**os.environ, "PYTHONUTF8": "1"})
         self.assertEqual(result.returncode, code, result.stdout + result.stderr)
@@ -30,7 +30,7 @@ class CliTests(unittest.TestCase):
         return result.stdout + result.stderr
 
     def test_creation_and_duplicate_protection(self) -> None:
-        """Создание подставляет формы, сохраняет ACTIVE и защищает существующие папки."""
+        """Verify creation and duplicate protection."""
         active = self.root / "projects/ACTIVE.md"
         original = active.read_bytes()
         self.run_cli("new", "project", "demo")
@@ -48,7 +48,7 @@ class CliTests(unittest.TestCase):
         self.run_cli("check")
 
     def test_invalid_names_and_missing_project(self) -> None:
-        """Пустые имена и попытки выйти из корня отвергаются."""
+        """Verify invalid names and missing project."""
         for name in ("", "../escape", "Demo", "demo/name", "демо", "demo name", "con", "a."):
             self.run_cli("new", "project", name, code=2)
         self.run_cli("new", "task", "missing", "01-test", code=2)
@@ -57,34 +57,34 @@ class CliTests(unittest.TestCase):
             self.run_cli("new", "task", "demo", name, code=2)
 
     def test_missing_templates_no_partial_creation(self) -> None:
-        """Ошибка чтения форм не оставляет полусозданный проект."""
+        """Verify missing templates no partial creation."""
         (self.root / "templates/project/evidence.md").write_bytes(b"\xff")
         self.run_cli("new", "project", "demo", code=2)
         self.assertFalse((self.root / "projects/demo").exists())
 
     def test_status_without_task(self) -> None:
-        """Отсутствие активной задачи не мешает посмотреть список проектов."""
+        """Verify status without task."""
         self.assertIn("нет", self.run_cli("status").lower())
         self.run_cli("new", "project", "demo")
         self.assertIn("demo", self.run_cli("status"))
         self.run_cli("next", "E", code=2)
 
     def test_status_counts_and_overdue(self) -> None:
-        """Сводка показывает поля состояния, виды, открытые вопросы и просрочки."""
+        """Verify status counts and overdue."""
         clean(self.root)
         text = self.run_cli("status")
         for token in ("demo", "01-test", "следующий шаг", "факт", "Q1", "K1", "D1"):
             self.assertIn(token, text)
 
     def test_next_across_all_tasks_and_statuses(self) -> None:
-        """Следующий номер учитывает другие задачи и устаревшие записи."""
+        """Verify next across all tasks and statuses."""
         task = clean(self.root)
         write(task.parents[1] / "tasks/02-other/work/old.md", record("E19", статус="устарело"))
         self.assertEqual(self.run_cli("next", "E").strip(), "E20")
         self.run_cli("next", "Z", code=2)
 
     def test_find_full_record_words_and_filters(self) -> None:
-        """Поиск возвращает запись, путь, строку и пересечение всех условий."""
+        """Verify find full record words and filters."""
         task = clean(self.root)
         text = self.run_cli("find", "E1")
         for token in ("evidence.md:1", "### E1", "450 рублей"):
@@ -99,7 +99,7 @@ class CliTests(unittest.TestCase):
         self.assertIn("Q8", self.run_cli("find", "цена", "подписки"))
 
     def test_impact_breadth_first_and_cycle(self) -> None:
-        """Зависимости доходят до вывода, варианта, решения и разделов без зацикливания."""
+        """Verify impact breadth first and cycle."""
         task = clean(self.root)
         text = self.run_cli("impact", "E1")
         for token in ("Уровень 1", "Уровень 2", "C1", "O3", "D1", "summary.md", "K1"):
@@ -111,7 +111,7 @@ class CliTests(unittest.TestCase):
         self.run_cli("impact", "E999", code=2)
 
     def test_check_exit_codes(self) -> None:
-        """Чистый проект возвращает 0, все двенадцать нарушений возвращают 1."""
+        """Verify check exit codes."""
         task = clean(self.root)
         self.assertIn("Нарушений: 0", self.run_cli("check", "--final"))
         from tools.tests.fixtures import break_rule
@@ -122,14 +122,14 @@ class CliTests(unittest.TestCase):
             self.assertIn(f"V{number:02}", text)
 
     def test_check_missing_active_target(self) -> None:
-        """Повреждённый указатель обрабатывается воротами, без traceback."""
+        """Verify check missing active target."""
         clean(self.root)
         write(self.root / "projects/ACTIVE.md", "- проект: demo\n- задача: 99-gone\n")
         self.assertIn("V12", self.run_cli("check", code=1))
         self.run_cli("status", code=2)
 
     def test_log_append_dedup_and_preserve_state_newlines(self) -> None:
-        """Журнал только растёт, ключ готового шага защищает повтор, CRLF сохраняется."""
+        """Verify log append dedup and preserve state newlines."""
         task = clean(self.root)
         journal = task / "journal.md"
         journal.write_bytes(journal.read_bytes().replace(b"\n", b"\r\n"))
@@ -149,7 +149,7 @@ class CliTests(unittest.TestCase):
         self.assertEqual((task / "STATE.md").read_bytes(), state)
 
     def test_failed_key_retry_and_journal_numbers(self) -> None:
-        """Ключ сбоя допускает повтор, номер журнала растёт от максимального."""
+        """Verify failed key retry and journal numbers."""
         task = clean(self.root)
         path = task / "journal.md"
         write(path, path.read_text(encoding="utf-8").replace("| 1 |", "| 9 |"))
@@ -159,7 +159,7 @@ class CliTests(unittest.TestCase):
         self.assertIn("Сбоев: 1", self.run_cli("cost"))
 
     def test_cost_totals_groups_estimates_and_price(self) -> None:
-        """Расходы складываются по этапам и средствам, цена заполняет только пустые рубли."""
+        """Verify cost totals groups estimates and price."""
         clean(self.root)
         base = ("log", "шаг", "--stage", "3", "--tool", "быстрая модель", "--result", "готово")
         self.run_cli(*base, "--minutes", "2", "--tokens", "1.5", "--approx")
@@ -170,7 +170,7 @@ class CliTests(unittest.TestCase):
         self.assertIn("₽: 4; без стоимости: 1", self.run_cli("cost"))
 
     def test_bad_parameters_and_missing_files(self) -> None:
-        """Неверные параметры, недостающие файлы и пустой ввод имеют код 2."""
+        """Verify bad parameters and missing files."""
         self.run_cli(code=2)
         self.run_cli("unknown", code=2)
         self.run_cli("find", "E1", "--project", "../outside", code=2)
@@ -185,19 +185,19 @@ class CliTests(unittest.TestCase):
         self.run_cli("cost", code=2)
 
     def test_global_options_before_and_after_command(self) -> None:
-        """Общие параметры принимаются с обеих сторон команды."""
+        """Verify global options before and after command."""
         clean(self.root)
         self.run_cli("--project", "demo", "--task", "01-test", "status")
         self.run_cli("status", "--project", "demo", "--task", "01-test")
 
     def test_explicit_selection_does_not_need_active(self) -> None:
-        """Явный проект позволяет поиск без активной задачи."""
+        """Verify explicit selection does not need active."""
         clean(self.root)
         write(self.root / "projects/ACTIVE.md", "- проект: нет\n- задача: нет\n")
         self.assertIn("E1", self.run_cli("find", "E1", "--project", "demo"))
 
     def test_utf8_error_is_short(self) -> None:
-        """Неверная кодировка становится понятной ошибкой запуска."""
+        """Verify utf8 error is short."""
         clean(self.root)
         (self.root / "projects/demo/evidence.md").write_bytes(b"\xff")
         self.run_cli("find", "E1", code=2)

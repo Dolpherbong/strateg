@@ -1,4 +1,4 @@
-"""Создание задач и безопасный выбор путей."""
+"""Create tasks and select paths safely."""
 
 from datetime import date
 from pathlib import Path
@@ -8,14 +8,14 @@ from .records import fields, read
 
 
 def name(value: str, task: bool = False) -> str:
-    """Проверяет переносимое имя каталога.
+    """Validate a portable directory name.
 
     Args:
-        value: Имя проекта или задачи.
-        task: Требовать префикс NN-.
+        value: Value to validate.
+        task: Task directory or selected task name.
 
     Returns:
-        Проверенное имя.
+        The validated name.
     """
     pattern = r"[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*" if task else r"[a-z0-9]+(?:-[a-z0-9]+)*"
     reserved = ("con", "prn", "aux", "nul", *(f"com{i}" for i in range(1, 10)), *(f"lpt{i}" for i in range(1, 10)))
@@ -25,14 +25,14 @@ def name(value: str, task: bool = False) -> str:
 
 
 def within(root: Path, path: Path) -> Path:
-    """Проверяет, что путь после раскрытия ссылок остаётся внутри корня.
+    """Ensure the resolved path remains inside the allowed root.
 
     Args:
-        root: Разрешённый корень.
-        path: Проверяемый путь.
+        root: Repository root.
+        path: File path.
 
     Returns:
-        Исходный проверенный путь.
+        The original validated path.
     """
     if not path.resolve().is_relative_to(root.resolve()):
         raise ValueError(f"Путь выходит за пределы корня: {path.name}")
@@ -72,14 +72,14 @@ def _create(target: Path, plan: tuple[list[Path], list[tuple[Path, str]]]) -> No
 
 
 def create_project(root: Path, project: str) -> Path:
-    """Создаёт новый проект из форм без изменения ACTIVE.md.
+    """Create a project from templates without changing ACTIVE.md.
 
     Args:
-        root: Корень репозитория.
-        project: Имя проекта.
+        root: Repository root.
+        project: Project directory or selected project name.
 
     Returns:
-        Путь созданного проекта.
+        The created project directory.
     """
     target = within(root, root / "projects" / name(project))
     if target.exists():
@@ -103,15 +103,15 @@ def _active_text(path: Path, project: str, task: str) -> str:
 
 
 def create_task(root: Path, project: str, task: str) -> Path:
-    """Создаёт задачу из форм и делает её активной.
+    """Create a task from templates and mark it active.
 
     Args:
-        root: Корень репозитория.
-        project: Имя существующего проекта.
-        task: Имя новой задачи NN-имя.
+        root: Repository root.
+        project: Project directory or selected project name.
+        task: Task directory or selected task name.
 
     Returns:
-        Путь созданной задачи.
+        The created task directory.
     """
     parent = within(root, root / "projects" / name(project))
     if not parent.is_dir():
@@ -131,13 +131,13 @@ def create_task(root: Path, project: str, task: str) -> Path:
 
 
 def active_names(root: Path) -> tuple[str | None, str | None]:
-    """Читает указатель активной задачи.
+    """Read the active project and task names.
 
     Args:
-        root: Корень репозитория.
+        root: Repository root.
 
     Returns:
-        Имена проекта и задачи или None.
+        Project and task names, or None.
     """
     path = within(root, root / "projects/ACTIVE.md")
     values = fields(read(path))[0] if path.exists() else {}
@@ -147,16 +147,16 @@ def active_names(root: Path) -> tuple[str | None, str | None]:
 
 
 def select(root: Path, project: str | None, task: str | None, required: bool = True) -> tuple[Path, Path | None]:
-    """Выбирает проект и задачу из параметров или ACTIVE.md.
+    """Select a project and task from arguments or ACTIVE.md.
 
     Args:
-        root: Корень репозитория.
-        project: Явное имя проекта.
-        task: Явное имя задачи.
-        required: Проверять наличие каталога задачи.
+        root: Repository root.
+        project: Project directory or selected project name.
+        task: Task directory or selected task name.
+        required: Whether the selected task directory must exist.
 
     Returns:
-        Пути проекта и выбранной задачи.
+        The selected project and task paths.
     """
     active_project, active_task = active_names(root)
     selected_project = project if project is not None else active_project

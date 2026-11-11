@@ -1,4 +1,4 @@
-"""Дописывание журнала и расчёт времени и расходов."""
+"""Append journal entries and summarize time and cost."""
 
 from dataclasses import dataclass
 from datetime import datetime
@@ -11,7 +11,7 @@ from .workspace import within
 
 @dataclass(frozen=True)
 class LogEntry:
-    """Параметры нового шага журнала."""
+    """Parameters of one journal entry."""
 
     action: str
     stage: int
@@ -26,13 +26,13 @@ class LogEntry:
 
 
 def number(value: str) -> Decimal:
-    """Проверяет неотрицательное конечное число.
+    """Parse a nonnegative decimal number.
 
     Args:
-        value: Число с точкой или запятой.
+        value: Value to validate.
 
     Returns:
-        Точное десятичное значение.
+        A finite nonnegative Decimal value.
     """
     try:
         result = Decimal(value.replace(",", "."))
@@ -72,14 +72,14 @@ def _rows(text: str) -> list[tuple[str, ...]]:
 
 
 def append(task: Path, entry: LogEntry) -> tuple[str, bool]:
-    """Дописывает строку или возвращает готовый шаг с тем же ключом.
+    """Append a step unless its successful key is already present.
 
     Args:
-        task: Каталог задачи.
-        entry: Данные шага.
+        task: Task directory or selected task name.
+        entry: Journal entry parameters.
 
     Returns:
-        Строка журнала и признак того, что ключ уже выполнен.
+        The journal row and whether the key already succeeded.
     """
     path = within(task, task / "journal.md")
     text = read(path)
@@ -123,14 +123,14 @@ def _total(rows: list[tuple[str, ...]], price: Decimal | None) -> str:
 
 
 def cost(task: Path, price: Decimal | None = None) -> tuple[str, ...]:
-    """Считает расходы всего, по этапам и по средствам.
+    """Summarize journal totals by stage and tool.
 
     Args:
-        task: Каталог задачи.
-        price: Цена тысячи токенов для строк без рублей.
+        task: Task directory or selected task name.
+        price: Optional price per thousand tokens.
 
     Returns:
-        Строки сводки, отдельно число сбоев.
+        Summary lines, marking estimates with a tilde.
     """
     rows = _rows(read(within(task, task / "journal.md")))
     lines = [f"Шагов: {len(rows)}", f"Всего: {_total(rows, price)}"]

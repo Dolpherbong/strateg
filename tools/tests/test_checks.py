@@ -1,4 +1,4 @@
-"""Проверки ворот V01-V12 на учебных проектах."""
+"""Verify checks.py."""
 
 from pathlib import Path
 import tempfile
@@ -8,26 +8,26 @@ from tools.tests.fixtures import break_rule, broken, clean, prepare, record, wri
 
 
 class ChecksTests(unittest.TestCase):
-    """Проверяет каждый вид нарушения и пустые формы."""
+    """Check all validation gates and empty templates."""
 
     def setUp(self) -> None:
-        """Создаёт изолированный корень с кириллицей и пробелами."""
+        """Create an isolated sample root with Cyrillic characters and spaces."""
         self.temp = tempfile.TemporaryDirectory(prefix="учебный проект ", dir=Path(__file__).parent)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         prepare(self.root)
 
     def codes(self, task: Path, final: bool = False) -> set[str]:
-        """Возвращает коды найденных нарушений."""
+        """Return the set of validation issue codes."""
         from tools.lib.checks import check
         return {issue.code for issue in check(self.root, task.parents[1], task, final)}
 
     def test_clean_final(self) -> None:
-        """Полный проект проходит финальные ворота."""
+        """Verify clean final."""
         self.assertEqual(self.codes(clean(self.root), True), set())
 
     def test_new_task_passes(self) -> None:
-        """Незаполненные формы новой задачи проходят обычные ворота."""
+        """Verify new task passes."""
         from tools.lib.workspace import create_project, create_task
         create_project(self.root, "demo")
         task = create_task(self.root, "demo", "01-test")
@@ -35,7 +35,7 @@ class ChecksTests(unittest.TestCase):
         self.assertTrue({"V09", "V10"} <= self.codes(task, True))
 
     def test_each_rule_independently(self) -> None:
-        """Каждое из двенадцати нарушений обнаруживается отдельно."""
+        """Verify each rule independently."""
         task = clean(self.root)
         original = {p: p.read_bytes() for p in self.root.rglob("*.md")}
         for number in range(1, 13):
@@ -47,11 +47,11 @@ class ChecksTests(unittest.TestCase):
                 self.assertIn(code, self.codes(task, True))
 
     def test_all_twelve_together(self) -> None:
-        """Учебный проект показывает все двенадцать проверок за раз."""
+        """Verify all twelve together."""
         self.assertEqual(self.codes(broken(self.root), True), {f"V{n:02}" for n in range(1, 13)})
 
     def test_v01_duplicate_missing_and_wrong_location(self) -> None:
-        """Повторы, потерянные ссылки и неверные файлы видны во всём проекте."""
+        """Verify v01 duplicate missing and wrong location."""
         task = clean(self.root)
         write(task / "work/wrong.md", record("E1", текст="[E999]"))
         from tools.lib.checks import check
@@ -60,19 +60,48 @@ class ChecksTests(unittest.TestCase):
             self.assertTrue(any(word in message for message in issues), issues)
 
     def test_v02_fields_enums_dates_and_broken_record(self) -> None:
-        """Пустое поле, неверные значения, даты и битый заголовок не теряются."""
+        """Verify v02 fields enums dates and broken record."""
         task = clean(self.root)
         path = task.parents[1] / "sources.md"
         valid = path.read_text(encoding="utf-8")
         for old, new in (("- название: Учебный сайт", "- название:"), ("- тип: сайт", "- тип: другое"),
                          ("2026-11-11", "2026-2-01"), ("2026-11-11", "2026-02-30"),
-                         ("### S1", "### Sbroken"), ("- тип: сайт", "- тип: сайт\n- тип: сайт")):
+                         ("- тип: сайт", "- тип: сайт\n- тип: сайт")):
             with self.subTest(new=new):
                 write(path, valid.replace(old, new))
                 self.assertIn("V02", self.codes(task))
 
+    def test_v01_broken_record_number(self) -> None:
+        """Report malformed record numbers as V01, without V02."""
+        from tools.lib.checks import check
+        task = clean(self.root)
+        path = task.parents[1] / "sources.md"
+        write(path, path.read_text(encoding="utf-8").replace("### S1", "### Sbroken"))
+        issues = check(self.root, task.parents[1], task)
+        malformed = [issue for issue in issues if issue.message == "битый номер записи"]
+        self.assertEqual([issue.code for issue in malformed], ["V01"])
+        self.assertNotIn("V02", {issue.code for issue in issues})
+
+    def test_v07_record_references_are_not_document_references(self) -> None:
+        """Check C and O references once, retaining separate prose references."""
+        from tools.lib.checks import check
+        task = clean(self.root)
+        evidence = task.parents[1] / "evidence.md"
+        write(evidence, evidence.read_text(encoding="utf-8").replace(
+            "статус: действует", "статус: устарело\n- заменено: E2") + record("E2"))
+        for filename, number in (("situation.md", "C1"), ("options.md", "O1")):
+            path = task / "out" / filename
+            for status in ("действует", "отозвано"):
+                for prose in ("", "## Итог\nСсылка [E1].\n"):
+                    with self.subTest(number=number, status=status, prose=bool(prose)):
+                        write(path, record(number, текст="[E1]", статус=status) + prose)
+                        issues = [i for i in check(self.root, task.parents[1], task)
+                                  if i.code == "V07" and i.path == path]
+                        subjects = ([number] if status == "действует" else []) + (["E1"] if prose else [])
+                        self.assertCountEqual([i.subject for i in issues], subjects)
+
     def test_v03_missing_fields_and_quote_boundary(self) -> None:
-        """Каждое поле факта обязательно, граница цитаты ровно 25 слов."""
+        """Verify v03 missing fields and quote boundary."""
         task = clean(self.root)
         path = task.parents[1] / "evidence.md"
         original = path.read_text(encoding="utf-8")
@@ -84,7 +113,7 @@ class ChecksTests(unittest.TestCase):
             self.assertEqual("V03" in self.codes(task), count > 25)
 
     def test_v04_all_kinds(self) -> None:
-        """Оценке нужны основание и расчёт, гипотезе проверка, прогнозу источник и срок."""
+        """Verify v04 all kinds."""
         task = clean(self.root)
         path = task.parents[1] / "evidence.md"
         original = path.read_text(encoding="utf-8")
@@ -99,7 +128,7 @@ class ChecksTests(unittest.TestCase):
         self.assertNotIn("V04", self.codes(task))
 
     def test_v05_both_fields(self) -> None:
-        """Вывод запрещён и в источнике, и в основании сведения."""
+        """Verify v05 both fields."""
         task = clean(self.root)
         path = task.parents[1] / "evidence.md"
         original = path.read_text(encoding="utf-8")
@@ -108,7 +137,7 @@ class ChecksTests(unittest.TestCase):
             self.assertIn("V05", self.codes(task))
 
     def test_v06_synthetic_support_and_model_source(self) -> None:
-        """Синтетика не доказывает вывод или решение и требует модельный источник."""
+        """Verify v06 synthetic support and model source."""
         task = clean(self.root)
         path = task.parents[1] / "evidence.md"
         write(path, path.read_text(encoding="utf-8").replace("вид: факт", "вид: синтетика"))
@@ -123,7 +152,7 @@ class ChecksTests(unittest.TestCase):
         self.assertIn("V06", self.codes(task))
 
     def test_v07_current_and_historical(self) -> None:
-        """Исторические записи не требуют актуальной опоры, действующие требуют."""
+        """Verify v07 current and historical."""
         task = clean(self.root)
         break_rule(task, "V07")
         self.assertIn("V07", self.codes(task))
@@ -132,7 +161,7 @@ class ChecksTests(unittest.TestCase):
         self.assertIn("V07", self.codes(task))
 
     def test_v08_confidence_support(self) -> None:
-        """Высокой и средней уверенности недостаточно одной гипотезы."""
+        """Verify v08 confidence support."""
         task = clean(self.root)
         path = task.parents[1] / "evidence.md"
         write(path, path.read_text(encoding="utf-8").replace("вид: факт", "вид: гипотеза") + "- как проверить: цена\n")
@@ -142,7 +171,7 @@ class ChecksTests(unittest.TestCase):
         self.assertNotIn("V08", self.codes(task))
 
     def test_v09_counts_roles_and_empty_fields(self) -> None:
-        """Проверяет число, обязательные роли и два содержательных поля варианта."""
+        """Verify v09 counts roles and empty fields."""
         task = clean(self.root)
         path = task / "out/options.md"
         original = path.read_text(encoding="utf-8")
@@ -153,7 +182,7 @@ class ChecksTests(unittest.TestCase):
             self.assertIn("V09", self.codes(task))
 
     def test_v10_missing_empty_sections_and_documents(self) -> None:
-        """Список документов и разделов берётся из форм, комментарии и код не заполняют раздел."""
+        """Verify v10 missing empty sections and documents."""
         task = clean(self.root)
         write(self.root / "templates/out/extra.md", "# Ещё\n## Новый раздел\n")
         self.assertIn("V10", self.codes(task, True))
@@ -162,18 +191,19 @@ class ChecksTests(unittest.TestCase):
         self.assertNotIn("V10", self.codes(task))
 
     def test_v11_only_template_can_exempt(self) -> None:
-        """Метка в документе не снимает опору, пометки и метка формы снимают."""
+        """Verify v11 only template can exempt."""
         task = clean(self.root)
         write(self.root / "templates/out/extra.md", "## Основание\n## Свободно\n<!-- без опоры -->\n")
         path = task / "out/extra.md"
         write(path, "## Основание\n<!-- без опоры -->\nТекст.\n## Свободно\nТекст.\n")
         self.assertIn("V11", self.codes(task, True))
-        for marker in ("гипотеза", "Допущение", "не знаем", "[E1]"):
+        for marker in ("гипотеза", "Допущение", "Допущения:", "гипотезы", "ГИПОТЕЗАМИ",
+                       "допущению", "не знаем", "НЕ   ЗНАЕМ", "[E1]"):
             write(path, f"## Основание\n{marker}\n## Свободно\nТекст.\n")
             self.assertNotIn("V11", self.codes(task, True))
 
     def test_v12_missing_state_journal_and_active_target(self) -> None:
-        """Отсутствующие файлы и неверный указатель становятся нарушениями."""
+        """Verify v12 missing state journal and active target."""
         task = clean(self.root)
         for name in ("STATE.md", "journal.md"):
             path = task / name

@@ -1,4 +1,4 @@
-"""Ворота V01-V12 без оценки смысла и без изменения файлов."""
+"""Validate gates V01-V12 without semantic evaluation or file changes."""
 
 from collections import Counter
 from dataclasses import dataclass
@@ -12,7 +12,7 @@ from .workspace import active_names, name, within
 
 @dataclass(frozen=True)
 class Issue:
-    """Одна находка ворот."""
+    """One gate validation issue."""
 
     code: str
     path: Path
@@ -49,7 +49,7 @@ def _numbers(project: Path, data: Project) -> list[Issue]:
                 issues.append(Issue("V01", path, ref, "ссылка на запись, которой нет"))
         for line, text_line in enumerate(visible(text).splitlines(), 1):
             if re.match(r"^###\s+[SEQOCDK]\S*(?:\s|$)", text_line) and not re.match(rf"^###\s+{ID_PATTERN}(?:\s|$)", text_line):
-                issues.append(Issue("V02", path, f"строка {line}", "битый номер записи"))
+                issues.append(Issue("V01", path, f"строка {line}", "битый номер записи"))
     return issues
 
 
@@ -179,10 +179,20 @@ def _outdated(project: Path, data: Project, index: dict[str, Record]) -> list[Is
                     issues.append(_issue("V07", record, f"ссылка на устаревшую или отозванную запись {ref}"))
     for path, text in data.documents.items():
         if _out(path, project):
-            for ref in references(text):
+            for ref in references(_outside_records(path, text, data.records)):
                 if ref in old:
                     issues.append(Issue("V07", path, ref, "итоговый документ ссылается на устаревшую или отозванную запись"))
     return issues
+
+
+def _outside_records(path: Path, text: str, records: tuple[Record, ...]) -> str:
+    lines = text.splitlines(keepends=True)
+    for record in records:
+        if record.path == path:
+            start = record.line - 1
+            end = start + len(record.text.splitlines())
+            lines[start:end] = ["\n"] * (end - start)
+    return "".join(lines)
 
 
 def _options(task: Path, data: Project, final: bool) -> list[Issue]:
@@ -218,7 +228,7 @@ def _section_checks(path: Path, template: str, document: str) -> list[Issue]:
         if not content:
             issues.append(Issue("V10", path, section.title, "раздел пуст"))
         exempt = section.title in expected and "<!-- без опоры -->" in expected[section.title].raw
-        if not exempt and not references(section.text) and not re.search(r"\b(?:гипотеза|допущение|не\s+знаем)\b", section.text, re.I):
+        if not exempt and not references(section.text) and not re.search(r"\b(?:(?:гипотез|допущени)\w*|не\s+знаем)\b", section.text, re.I):
             issues.append(Issue("V11", path, section.title, "нет ссылки или пометки об отсутствии опоры"))
     return issues
 
@@ -259,13 +269,13 @@ def _state(root: Path, task: Path) -> list[Issue]:
 
 
 def active_issues(root: Path) -> tuple[Issue, ...]:
-    """Проверяет указатель ACTIVE.md, включая неверные имена.
+    """Validate the ACTIVE.md pointer, including invalid names.
 
     Args:
-        root: Корень репозитория.
+        root: Repository root.
 
     Returns:
-        Нарушение V12 или пустой кортеж.
+        V12 issues, or an empty tuple.
     """
     try:
         project_name, task_name = active_names(root)
@@ -283,16 +293,16 @@ def active_issues(root: Path) -> tuple[Issue, ...]:
 
 
 def check(root: Path, project: Path, task: Path, final: bool = False) -> tuple[Issue, ...]:
-    """Проверяет проект и выбранную задачу.
+    """Validate the project and selected task.
 
     Args:
-        root: Корень репозитория.
-        project: Каталог проекта.
-        task: Каталог выбранной задачи, может отсутствовать.
-        final: Добавить финальные проверки документов.
+        root: Repository root.
+        project: Project directory.
+        task: Selected task directory; it may not exist yet.
+        final: Whether to run final document checks.
 
     Returns:
-        Диагностики V01-V12 в стабильном порядке.
+        V01-V12 issues in stable order.
     """
     data = load_project(project)
     index = {record.id: record for record in data.records}

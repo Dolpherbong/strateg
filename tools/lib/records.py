@@ -1,4 +1,4 @@
-"""Единый разбор реестров, ссылок и разделов Markdown."""
+"""Parse registries, references, and Markdown sections."""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -7,7 +7,7 @@ import re
 
 @dataclass(frozen=True)
 class Schema:
-    """Обязательные поля и перечисления одного вида записи."""
+    """Required fields and choices for one record type."""
 
     letter: str
     required: str
@@ -38,7 +38,7 @@ ID_PATTERN = r"[SEQOCDK][1-9][0-9]*"
 
 @dataclass(frozen=True)
 class Record:
-    """Запись с исходным текстом и положением в файле."""
+    """A parsed record with its source text and file location."""
 
     id: str
     path: Path
@@ -52,7 +52,7 @@ class Record:
 
 @dataclass(frozen=True)
 class Section:
-    """Раздел документа вместе с вложенными заголовками."""
+    """A document section including nested headings."""
 
     title: str
     line: int
@@ -62,20 +62,20 @@ class Section:
 
 @dataclass(frozen=True)
 class Project:
-    """Разобранный снимок файлов проекта."""
+    """A parsed snapshot of project files."""
 
     records: tuple[Record, ...]
     documents: dict[Path, str]
 
 
 def read(path: Path) -> str:
-    """Читает UTF-8, сохраняя переводы строк.
+    """Read UTF-8 text while preserving line endings.
 
     Args:
-        path: Путь файла.
+        path: File path.
 
     Returns:
-        Исходный текст, включая CRLF при наличии.
+        Original text, including CRLF when present.
     """
     with path.open(encoding="utf-8-sig", newline="") as stream:
         return stream.read()
@@ -100,13 +100,13 @@ def _comments(line: str, inside: bool) -> tuple[str, bool]:
 
 
 def visible(text: str) -> str:
-    """Маскирует комментарии и ограждённый код без сдвига строк.
+    """Mask comments and fenced code without shifting lines.
 
     Args:
-        text: Markdown.
+        text: Source Markdown text.
 
     Returns:
-        Текст той же длины с пробелами вместо скрытых данных.
+        Text of the same length with hidden content replaced by spaces.
     """
     lines, comment, fence = [], False, ""
     for line in text.splitlines(keepends=True):
@@ -127,13 +127,13 @@ def visible(text: str) -> str:
 
 
 def fields(text: str) -> tuple[dict[str, str], tuple[str, ...]]:
-    """Разбирает однострочные поля по первому двоеточию.
+    """Parse single-line fields at the first colon.
 
     Args:
-        text: Текст с полями.
+        text: Source Markdown text.
 
     Returns:
-        Поля и список повторённых имён.
+        Field values and duplicate field names.
     """
     result, duplicates = {}, []
     for line in visible(text).splitlines():
@@ -147,13 +147,13 @@ def fields(text: str) -> tuple[dict[str, str], tuple[str, ...]]:
 
 
 def references(text: str) -> tuple[str, ...]:
-    """Читает ссылки из полей-ссылок и квадратных скобок.
+    """Read references from link fields and square brackets.
 
     Args:
-        text: Markdown с записями или свободным текстом.
+        text: Source Markdown text.
 
     Returns:
-        Номера в порядке первого появления, без повторов.
+        Unique identifiers in first-appearance order.
     """
     shown = visible(text)
     found = []
@@ -167,14 +167,14 @@ def references(text: str) -> tuple[str, ...]:
 
 
 def parse_records(path: Path, text: str) -> tuple[Record, ...]:
-    """Разбирает записи до следующего заголовка любого уровня.
+    """Parse records up to the next heading of any level.
 
     Args:
-        path: Путь для диагностик.
-        text: Исходный Markdown.
+        path: File path.
+        text: Source Markdown text.
 
     Returns:
-        Найденные записи с номерами строк.
+        Parsed records with line numbers.
     """
     raw_lines, shown_lines = text.splitlines(keepends=True), visible(text).splitlines(keepends=True)
     headings = [i for i, line in enumerate(shown_lines) if re.match(r"^ {0,3}#{1,6}\s+", line)]
@@ -191,13 +191,13 @@ def parse_records(path: Path, text: str) -> tuple[Record, ...]:
 
 
 def sections(text: str) -> tuple[Section, ...]:
-    """Выделяет разделы уровня два, включая вложенные записи.
+    """Extract level-two sections including nested records.
 
     Args:
-        text: Markdown документа или формы.
+        text: Source Markdown text.
 
     Returns:
-        Разделы с видимым и исходным текстом.
+        Sections with visible and original text.
     """
     raw, shown = text.splitlines(keepends=True), visible(text).splitlines(keepends=True)
     boundaries = [i for i, line in enumerate(shown) if re.match(r"^#{1,2}\s+", line)]
@@ -212,13 +212,13 @@ def sections(text: str) -> tuple[Section, ...]:
 
 
 def load_project(project: Path) -> Project:
-    """Читает Markdown во всём проекте, кроме inbox и внешних ссылок.
+    """Read project Markdown, excluding inbox and rejecting external links.
 
     Args:
-        project: Корень проекта.
+        project: Project directory or selected project name.
 
     Returns:
-        Единый снимок для find, impact и check.
+        A shared snapshot for find, impact, and check.
     """
     documents, records = {}, []
     for path in sorted(project.rglob("*.md")):

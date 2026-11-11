@@ -1,38 +1,38 @@
-"""Учебные проекты без сети, личных данных и сторонних пакетов."""
+"""Build isolated sample projects using only the standard library."""
 
 from pathlib import Path
 import shutil
 
 
 def write(path: Path, text: str) -> None:
-    """Записывает учебный UTF-8 файл.
+    """Write a sample UTF-8 file.
 
     Args:
-        path: Путь внутри временного учебного проекта.
-        text: Содержимое файла.
+        path: File path.
+        text: Source Markdown text.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8", newline="")
 
 
 def record(number: str, **fields: str) -> str:
-    """Собирает запись из полей.
+    """Build a Markdown record from fields.
 
     Args:
-        number: Номер записи.
-        fields: Поля записи.
+        number: Record identifier.
+        fields: Record field values.
 
     Returns:
-        Текст записи с заголовком.
+        Record text with a heading.
     """
     return f"### {number}\n" + "".join(f"- {k}: {v}\n" for k, v in fields.items()) + "\n"
 
 
 def prepare(root: Path) -> None:
-    """Копирует настоящие формы в учебный корень.
+    """Copy real templates into an isolated sample root.
 
     Args:
-        root: Изолированный корень.
+        root: Repository root.
     """
     source = Path(__file__).resolve().parents[2] / "templates"
     shutil.copytree(source, root / "templates")
@@ -40,13 +40,13 @@ def prepare(root: Path) -> None:
 
 
 def clean(root: Path) -> Path:
-    """Создаёт полный учебный проект со всеми видами записей.
+    """Create a complete clean sample project with all record types.
 
     Args:
-        root: Корень с формами.
+        root: Repository root.
 
     Returns:
-        Путь учебной задачи.
+        The sample task path.
     """
     from tools.lib.workspace import create_project, create_task
     create_project(root, "demo")
@@ -56,11 +56,11 @@ def clean(root: Path) -> Path:
 
 
 def populate(root: Path, task: Path) -> None:
-    """Заполняет существующую учебную задачу полным чистым примером.
+    """Populate an existing sample task with a complete clean example.
 
     Args:
-        root: Корень с формами.
-        task: Каталог новой учебной задачи.
+        root: Repository root.
+        task: Task directory or selected task name.
     """
     project = task.parents[1]
     _registries(project)
@@ -134,11 +134,11 @@ def _extra_break(task: Path, code: str) -> bool:
 
 
 def break_rule(task: Path, code: str) -> None:
-    """Вносит независимое нарушение выбранной проверки.
+    """Introduce an independent violation of the selected gate.
 
     Args:
-        task: Путь чистой учебной задачи.
-        code: Код V01-V12.
+        task: Task directory or selected task name.
+        code: Validation gate code from V01 through V12.
     """
     if _extra_break(task, code):
         return
@@ -159,13 +159,13 @@ def break_rule(task: Path, code: str) -> None:
 
 
 def broken(root: Path) -> Path:
-    """Создаёт проект с нарушениями всех двенадцати проверок.
+    """Create a sample project violating all twelve gates.
 
     Args:
-        root: Корень с формами.
+        root: Repository root.
 
     Returns:
-        Путь испорченной учебной задачи.
+        The invalid sample task path.
     """
     task = clean(root)
     for number in range(1, 13):

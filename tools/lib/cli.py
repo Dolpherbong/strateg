@@ -1,4 +1,4 @@
-"""Разбор параметров и единый договор команд."""
+"""Parse arguments and implement the shared command contract."""
 
 import argparse
 from collections import Counter
@@ -13,13 +13,13 @@ from .workspace import active_names, create_project, create_task, select
 
 
 class Parser(argparse.ArgumentParser):
-    """Парсер с короткими ошибками без завершения внутри библиотеки."""
+    """Argument parser that raises concise errors without exiting."""
 
     def error(self, message: str) -> None:
-        """Сообщает об ошибке параметров.
+        """Report invalid command arguments.
 
         Args:
-            message: Диагностика argparse.
+            message: Argument parser diagnostic.
         """
         translations = (("the following arguments are required:", "не указаны обязательные параметры:"),
                         ("unrecognized arguments:", "неизвестные параметры:"),
@@ -31,10 +31,10 @@ class Parser(argparse.ArgumentParser):
         raise ValueError(f"Неверные параметры: {message}")
 
     def format_help(self) -> str:
-        """Показывает русские подписи справки.
+        """Render help with Russian labels.
 
         Returns:
-            Справка с русскими служебными словами.
+            Help text with Russian labels.
         """
         text = super().format_help()
         for source, target in (("usage:", "Использование:"), ("positional arguments:", "Позиционные параметры:"),
@@ -158,13 +158,13 @@ def _dispatch(args: argparse.Namespace) -> tuple[tuple[str, ...], int]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Выполняет одну команду с кодом 0, 1 или 2.
+    """Run one command with exit code 0, 1, or 2.
 
     Args:
-        argv: Аргументы без имени скрипта, по умолчанию sys.argv.
+        argv: Arguments without the script name; defaults to sys.argv.
 
     Returns:
-        Код завершения по договору tools/README.md.
+        Exit code according to the command contract.
     """
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):

@@ -1,1 +1,1 @@
-"""Локальные инструменты Стратега."""
+"""Local tools and their standard-library tests."""

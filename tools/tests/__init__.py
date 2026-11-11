@@ -1,1 +1,1 @@
-"""Проверки инструментов на стандартной библиотеке."""
+"""Local tools and their standard-library tests."""
