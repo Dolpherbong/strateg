@@ -88,7 +88,7 @@ def _field_checks(record: Record) -> list[Issue]:
     for key, choices in schema.choices:
         if values.get(key) and values[key] not in choices.split("|"):
             issues.append(_issue("V02", record, f"недопустимое значение «{key}»: {values[key]}"))
-    for key in ("дата", "дата обращения", "срок", "срок проверки"):
+    for key in ("дата", "дата обращения", "срок", "срок проверки", "годен до"):
         if key in values and not _valid_date(values[key]):
             issues.append(_issue("V02", record, f"неверная дата в поле «{key}»"))
     for key in record.duplicate_fields:

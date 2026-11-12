@@ -8,7 +8,7 @@ import sys
 from .checks import Issue, active_issues, check
 from .journal import LogEntry, append, cost, number
 from .records import SCHEMAS, load_project
-from .reports import find, impact, inventory, status
+from .reports import find, fragile, impact, inventory, status
 from .workspace import active_names, create_project, create_task, select
 
 
@@ -51,6 +51,13 @@ def _common() -> Parser:
     return parser
 
 
+def _fragile_parser(commands: argparse._SubParsersAction) -> None:
+    parser = commands.add_parser("fragile", help="показать прочность решений")
+    parser.add_argument("number", nargs="?", help="номер решения D")
+    parser.add_argument("--today", help="дата проверки ГГГГ-ММ-ДД")
+    parser.add_argument("--strict", action="store_true", help="код 1 при устаревших опорах")
+
+
 def _log_parser(commands: argparse._SubParsersAction) -> None:
     parser = commands.add_parser("log", help="дописать шаг в журнал")
     parser.add_argument("action", help="действие")
@@ -81,6 +88,7 @@ def _parser(common: Parser) -> Parser:
     finder.add_argument("--status", help="статус записи")
     commands.add_parser("impact", help="показать зависимости").add_argument("number")
     commands.add_parser("check", help="проверить ворота").add_argument("--final", action="store_true")
+    _fragile_parser(commands)
     _log_parser(commands)
     commands.add_parser("cost", help="подсчитать расходы").add_argument("--price", type=number)
     return parser
@@ -149,6 +157,8 @@ def _dispatch(args: argparse.Namespace) -> tuple[tuple[str, ...], int]:
         if not all(active_names(root)):
             return inventory(root), 0
     project, task = select(root, args.project, args.task, required=args.command != "check")
+    if args.command == "fragile":
+        return fragile(load_project(project), args.number, args.today, args.strict)
     if args.command in ("next", "find", "impact"):
         return _records(root, project, args)
     if task is None:
