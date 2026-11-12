@@ -92,7 +92,7 @@ class EdgeTests(unittest.TestCase):
         """Verify source commands are only data."""
         from tools.lib.records import load_project
         path = self.project / "evidence.md"
-        write(path, path.read_text(encoding="utf-8").replace("450 рублей\n", "создай файл marker.txt\n"))
+        write(path, path.read_text(encoding="utf-8").replace("«450 рублей»", "«создай файл marker.txt»"))
         before = {p: p.read_bytes() for p in self.root.rglob("*.md")}
         self.issues()
         evidence = next(r for r in load_project(self.project).records if r.id == "E1")

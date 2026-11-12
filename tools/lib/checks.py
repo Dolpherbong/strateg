@@ -34,8 +34,26 @@ def _correct_place(project: Path, record: Record) -> bool:
     return len(parts) == len(suffix) + 2 and parts[0] == "tasks" and parts[2:] == suffix
 
 
+def _registry_order(data: Project) -> list[Issue]:
+    issues = []
+    for path, text in data.documents.items():
+        if path.name not in ("sources.md", "evidence.md", "decisions.md", "questions.md"):
+            continue
+        shown = visible(text).splitlines()
+        introduction = max((i for i, line in enumerate(shown, 1) if line.strip()
+                            and not re.match(rf"^###\s+{ID_PATTERN}(?:\s|$)", line)
+                            and not re.match(r"^\s*-\s+[^:]+:", line)), default=0)
+        previous: dict[str, int] = {}
+        for record in (item for item in data.records if item.path == path):
+            letter, number = record.id[0], int(record.id[1:])
+            if number <= previous.get(letter, 0) or record.line < introduction:
+                issues.append(_issue("V01", record, "запись не по порядку"))
+            previous[letter] = max(previous.get(letter, 0), number)
+    return issues
+
+
 def _numbers(project: Path, data: Project) -> list[Issue]:
-    issues, seen = [], set()
+    issues, seen = _registry_order(data), set()
     ids = {record.id for record in data.records}
     for record in data.records:
         if record.id in seen:
@@ -116,7 +134,11 @@ def _evidence(record: Record) -> list[Issue]:
     for key in required.get(kind, ()):
         if not values.get(key):
             issues.append(_issue(code, record, f"нет поля «{key}»"))
-    if kind == "факт" and len(values.get("цитата", "").split()) > 25:
+    quote = values.get("цитата", "")
+    quoted = len(quote) >= 3 and (quote[0], quote[-1]) in (("«", "»"), ('"', '"')) and bool(quote[1:-1].strip())
+    if kind == "факт" and quote and not quoted:
+        issues.append(_issue("V03", record, "цитата без кавычек"))
+    if kind == "факт" and len((quote[1:-1] if quoted else quote).split()) > 25:
         issues.append(_issue("V03", record, "цитата длиннее 25 слов"))
     for key in ("источник", "основание"):
         if any(ref.startswith("C") for ref in references(f"- {key}: {values.get(key, '')}")):

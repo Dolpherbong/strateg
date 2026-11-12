@@ -109,7 +109,7 @@ class ChecksTests(unittest.TestCase):
             write(path, "\n".join(l for l in original.splitlines() if not l.startswith(f"- {field}:")))
             self.assertIn("V03", self.codes(task))
         for count in (25, 26):
-            write(path, original.replace("450 рублей\n", " ".join(["слово"] * count) + "\n"))
+            write(path, original.replace("«450 рублей»", "«" + " ".join(["слово"] * count) + "»"))
             self.assertEqual("V03" in self.codes(task), count > 25)
 
     def test_v04_all_kinds(self) -> None:

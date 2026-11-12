@@ -102,24 +102,38 @@ def append(task: Path, entry: LogEntry) -> tuple[str, bool]:
     return line, False
 
 
-def _amount(cell: str) -> tuple[Decimal, bool]:
-    return (number(cell.lstrip("~")), cell.startswith("~")) if cell else (Decimal(0), False)
+def _amount(cell: str) -> tuple[Decimal | None, bool]:
+    return (number(cell.lstrip("~")), cell.startswith("~")) if cell else (None, False)
+
+
+def _row_count(count: int) -> str:
+    suffix = "строк"
+    if count % 100 not in (11, 12, 13, 14):
+        suffix = "строка" if count % 10 == 1 else "строки" if count % 10 in (2, 3, 4) else suffix
+    return f"{count} {suffix}"
+
+
+def _metric(value: Decimal, approx: bool, missing: int, count: int) -> str:
+    if count == missing:
+        return f"не оценено ({_row_count(missing)})" if missing else "не оценено"
+    suffix = f"; не оценено: {_row_count(missing)}" if missing else ""
+    return _format(value, approx) + suffix
 
 
 def _total(rows: list[tuple[str, ...]], price: Decimal | None) -> str:
-    sums, estimates, missing = [Decimal(0)] * 3, [False] * 3, 0
+    sums, estimates, missing = [Decimal(0)] * 3, [False] * 3, [0] * 3
     for row in rows:
         metrics = [_amount(cell) for cell in row[6:9]]
-        if not row[8] and row[7] and price is not None:
+        if metrics[2][0] is None and metrics[1][0] is not None and price is not None:
             metrics[2] = (metrics[1][0] * price, metrics[1][1])
-        elif not row[8]:
-            missing += 1
         for position, (value, approx) in enumerate(metrics):
-            sums[position] += value
-            estimates[position] = estimates[position] or approx
-    amounts = [_format(value, approx) for value, approx in zip(sums, estimates)]
-    suffix = f"; без стоимости: {missing}" if missing else ""
-    return f"шагов: {len(rows)}; мин: {amounts[0]}; ток., тыс.: {amounts[1]}; ₽: {amounts[2]}{suffix}"
+            if value is None:
+                missing[position] += 1
+            else:
+                sums[position] += value
+                estimates[position] = estimates[position] or approx
+    amounts = [_metric(value, approx, absent, len(rows)) for value, approx, absent in zip(sums, estimates, missing)]
+    return f"шагов: {len(rows)}; мин: {amounts[0]}; ток., тыс.: {amounts[1]}; ₽: {amounts[2]}"
 
 
 def _clock(rows: list[tuple[str, ...]]) -> str:

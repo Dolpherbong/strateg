@@ -167,7 +167,7 @@ class CliTests(unittest.TestCase):
         text = self.run_cli("cost", "--price", "10")
         for token in ("Всего", "Этап 3", "быстрая модель", "~19", "~3.5", "Шагов: 3"):
             self.assertIn(token, text)
-        self.assertIn("₽: 4; без стоимости: 1", self.run_cli("cost"))
+        self.assertIn("₽: 4; не оценено: 1 строк", self.run_cli("cost"))
 
     def test_bad_parameters_and_missing_files(self) -> None:
         """Verify bad parameters and missing files."""
