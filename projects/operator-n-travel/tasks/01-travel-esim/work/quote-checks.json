@@ -1,0 +1,322 @@
+{
+  "quote_checks": [
+    {
+      "record": "E75",
+      "source": "S19",
+      "match": true,
+      "path": "inbox\\decision-refinement-2026-11-11.txt"
+    },
+    {
+      "record": "E71",
+      "source": "S18",
+      "match": true,
+      "path": "inbox\\roaming-plan-2026-11-11.txt"
+    },
+    {
+      "record": "E72",
+      "source": "S18",
+      "match": true,
+      "path": "inbox\\roaming-plan-2026-11-11.txt"
+    },
+    {
+      "record": "E67",
+      "source": "S17",
+      "match": true,
+      "path": "inbox\\decision-2026-11-11.txt"
+    },
+    {
+      "record": "E68",
+      "source": "S17",
+      "match": true,
+      "path": "inbox\\decision-2026-11-11.txt"
+    },
+    {
+      "record": "E69",
+      "source": "S17",
+      "match": true,
+      "path": "inbox\\decision-2026-11-11.txt"
+    },
+    {
+      "record": "E70",
+      "source": "S17",
+      "match": true,
+      "path": "inbox\\decision-2026-11-11.txt"
+    },
+    {
+      "record": "E65",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E54",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E55",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E29",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E30",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E31",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E32",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E33",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E34",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E35",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E36",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E37",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E38",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E39",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E40",
+      "source": "S12",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E42",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E43",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E44",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E45",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E46",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E47",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E48",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E49",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E1",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E2",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E3",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E4",
+      "source": "S1",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E5",
+      "source": "S2",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E6",
+      "source": "S2",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E7",
+      "source": "S2",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E8",
+      "source": "S2",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E9",
+      "source": "S3",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E10",
+      "source": "S3",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E11",
+      "source": "S4",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E12",
+      "source": "S4",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E13",
+      "source": "S5",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E14",
+      "source": "S5",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E15",
+      "source": "S6",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E16",
+      "source": "S7",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E18",
+      "source": "S8",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E19",
+      "source": "S8",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E20",
+      "source": "S9",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E22",
+      "source": "S10",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E17",
+      "source": "S7",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E21",
+      "source": "S9",
+      "match": null,
+      "status": "источник недоступен"
+    },
+    {
+      "record": "E27",
+      "source": "S3",
+      "match": null,
+      "status": "источник недоступен"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+source,file,width_px,height_px,bytes,sha256,url_from_user,capture_date_from_user
+S21,inbox/screens/beeline-01-glavnyj-ekran.png,1366,900,145663,c73368fac43bb708f2876b55fd31d6a9b99ca0da95263079a7067c291f305465,https://moskva.beeline.ru/travel-esim/,2026-11-12
+S22,inbox/screens/beeline-02-napravleniya.png,1366,600,62494,3598c4d6f9c3616475f64023e30a173c5cdeff3f93be8381f0ac20d1ccc07ede,https://moskva.beeline.ru/travel-esim/,2026-11-12
+S23,inbox/screens/beeline-03-obeshchaniya.png,1366,950,164418,15789d6f8275fb90f674c6d3cb02393dc8045fc1aa2686745ef195d7c5819097,https://moskva.beeline.ru/travel-esim/,2026-11-12
+S24,inbox/screens/beeline-04-podklyuchenie.png,1366,800,110417,19d379ec0399f522db5b6a265963c1d7c8cd39164c200110eba73fcc40d4ef66,https://moskva.beeline.ru/travel-esim/,2026-11-12
+S25,inbox/screens/mts-01-vybor-strany.png,1366,900,443879,101f1814bc6eb5b515402baeec4955b55b0f836ae116b70e599b0d8ca76f9e47,https://payment.mts.ru/esim,2026-11-12
+S26,inbox/screens/mts-02-turciya-zakaz.png,1366,1100,276254,48c44837c73f71b889fa7e22aebb5e97ea18c9f7736fd3de5288a5ef5a40f505,https://payment.mts.ru/esim/turkey,2026-11-12
+S27,inbox/screens/mts-03-turciya-pakety.png,1366,1500,88318,716174e818ac2432ccc2f1767b96e3a83295055cd5fc52bdd66902ac2f5c2170,https://payment.mts.ru/esim/turkey,2026-11-12
+S28,inbox/screens/mts-04-rouming-sravnenie.png,1366,800,47508,2aa538b1de9d20238c7bd025b9ba831a9f0d7923a565d84241def17dc9ef0814,https://payment.mts.ru/esim/turkey,2026-11-12

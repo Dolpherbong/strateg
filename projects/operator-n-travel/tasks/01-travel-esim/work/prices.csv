@@ -1,0 +1,5 @@
+offer,price_rub,country,gb,days,kind,evidence,source,as_of,valid_from
+esim_mts_payment,718,Турция,10,30,факт,E9,S3,2026-11-11,
+t2_standard,3900,Турция,10,30,факт,E11,S4,2026-11-11,
+mts_personal,646,Турция,10,30,факт,E18,S8,2026-11-11,
+n_planned,590,Турция,10,30,прогноз,E72,S18,2026-11-11,2026-12-01

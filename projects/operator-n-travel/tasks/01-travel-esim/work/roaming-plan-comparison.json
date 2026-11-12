@@ -1,7 +1,33 @@
 {
-  "esim_snapshot_rub": 718,
-  "N_planned_rub": 590,
-  "difference_rub": 128,
+  "inputs": [
+    {
+      "offer": "esim_mts_payment",
+      "price_rub": "718",
+      "country": "Турция",
+      "gb": "10",
+      "days": "30",
+      "kind": "факт",
+      "evidence": "E9",
+      "source": "S3",
+      "as_of": "2026-11-11",
+      "valid_from": ""
+    },
+    {
+      "offer": "n_planned",
+      "price_rub": "590",
+      "country": "Турция",
+      "gb": "10",
+      "days": "30",
+      "kind": "прогноз",
+      "evidence": "E72",
+      "source": "S18",
+      "as_of": "2026-11-11",
+      "valid_from": "2026-12-01"
+    }
+  ],
+  "esim_snapshot_rub": 718.0,
+  "N_planned_rub": 590.0,
+  "difference_rub": 128.0,
   "N_lower_percent_of_esim_price": 17.8,
   "condition": "Запуск N с 2026-12-01 и неизменность цены eSIM; не сравнение качества или маржи"
 }

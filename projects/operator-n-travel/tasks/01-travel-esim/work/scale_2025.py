@@ -1,36 +1,38 @@
-"""Извлечение и расчёт выбранных строк официальной таблицы; без прогноза спроса."""
+"""Расчёт из зафиксированной CSV-выборки S12; без кэша и прогноза спроса."""
 from pathlib import Path
 from decimal import Decimal
-from html import unescape
 import csv
 import json
-import re
 import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 work = Path(__file__).resolve().parent
-project = work.parents[2]
-text = (project / '.cache' / 'S12.txt').read_text(encoding='utf-8')
-# Берём первую полную HTML-таблицу из индексированного текста официального PDF.
-table = re.search(r'<table[^>]*>(.*?)</table>', text, re.S)[1]
-rows = {}
-for row in re.findall(r'<tr>(.*?)</tr>', table, re.S):
-    cells = [unescape(re.sub(r'<[^>]+>', '', cell)).strip() for cell in re.findall(r'<td[^>]*>(.*?)</td>', row, re.S)]
-    if len(cells) >= 2:
-        rows[cells[0]] = cells[1]
-
 records = {'Всего':'E29', 'Турция':'E30', 'Абхазия':'E31', 'Казахстан':'E32',
            'Объединенные Арабские Эмираты':'E33', 'Китай':'E34', 'Египет':'E35',
            'Грузия':'E36', 'Таиланд':'E37', 'Армения':'E38'}
 values = {}
-with (work / 'outbound-2025.csv').open('w', encoding='utf-8', newline='') as target:
-    writer = csv.writer(target)
-    writer.writerow(['destination','year','thousand_trips','evidence'])
-    for destination, evidence in records.items():
-        value = Decimal(re.sub(r'\s+', '', rows[destination]).replace(',', '.'))
-        values[destination] = value
-        writer.writerow([destination,2025,str(value),evidence])
-    writer.writerow(['Беларусь',2025,'','E40'])
+with (work / 'outbound-2025.csv').open(encoding='utf-8-sig', newline='') as stream:
+    rows = list(csv.DictReader(stream))
+if len({row['destination'] for row in rows}) != len(rows):
+    raise ValueError('Дубли направлений')
+if {row['destination'] for row in rows} != set(records) | {'Беларусь'}:
+    raise ValueError('Неверный набор направлений')
+for row in rows:
+    if row['year'] != '2025':
+        raise ValueError('Смешаны периоды')
+    destination = row['destination']
+    if destination == 'Беларусь':
+        if row['thousand_trips'] != '' or row['evidence'] != 'E40':
+            raise ValueError('Прочерк Беларуси должен оставаться пропуском')
+        continue
+    if row['evidence'] != records[destination]:
+        raise ValueError('Неверное основание строки')
+    value = Decimal(row['thousand_trips'])
+    if not value.is_finite() or value < 0:
+        raise ValueError('Недопустимое число поездок')
+    values[destination] = value
+if values['Всего'] <= 0 or any(value > values['Всего'] for value in values.values()):
+    raise ValueError('Неверный общий итог или часть больше итога')
 
 selected = ['Турция','Объединенные Арабские Эмираты','Египет','Таиланд']
 subtotal = sum(values[key] for key in selected)

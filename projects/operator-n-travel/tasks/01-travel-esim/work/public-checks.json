@@ -1,273 +1,70 @@
 {
-  "quote_checks": [
-    {
-      "record": "E67",
-      "source": "S17",
-      "match": true
-    },
-    {
-      "record": "E68",
-      "source": "S17",
-      "match": true
-    },
-    {
-      "record": "E69",
-      "source": "S17",
-      "match": true
-    },
-    {
-      "record": "E70",
-      "source": "S17",
-      "match": true
-    },
-    {
-      "record": "E65",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E54",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E55",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E29",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E30",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E31",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E32",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E33",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E34",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E35",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E36",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E37",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E38",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E39",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E40",
-      "source": "S12",
-      "match": true
-    },
-    {
-      "record": "E42",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E43",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E44",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E45",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E46",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E47",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E48",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E49",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E1",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E2",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E3",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E4",
-      "source": "S1",
-      "match": true
-    },
-    {
-      "record": "E5",
-      "source": "S2",
-      "match": true
-    },
-    {
-      "record": "E6",
-      "source": "S2",
-      "match": true
-    },
-    {
-      "record": "E7",
-      "source": "S2",
-      "match": true
-    },
-    {
-      "record": "E8",
-      "source": "S2",
-      "match": true
-    },
-    {
-      "record": "E9",
-      "source": "S3",
-      "match": true
-    },
-    {
-      "record": "E10",
-      "source": "S3",
-      "match": true
-    },
-    {
-      "record": "E11",
-      "source": "S4",
-      "match": true
-    },
-    {
-      "record": "E12",
-      "source": "S4",
-      "match": true
-    },
-    {
-      "record": "E13",
-      "source": "S5",
-      "match": true
-    },
-    {
-      "record": "E14",
-      "source": "S5",
-      "match": true
-    },
-    {
-      "record": "E15",
-      "source": "S6",
-      "match": true
-    },
-    {
-      "record": "E16",
-      "source": "S7",
-      "match": true
-    },
-    {
-      "record": "E18",
-      "source": "S8",
-      "match": true
-    },
-    {
-      "record": "E19",
-      "source": "S8",
-      "match": true
-    },
-    {
-      "record": "E20",
-      "source": "S9",
-      "match": true
-    },
-    {
-      "record": "E22",
-      "source": "S10",
-      "match": true
-    },
-    {
-      "record": "E17",
-      "source": "S7",
-      "match": true
-    },
-    {
-      "record": "E21",
-      "source": "S9",
-      "match": true
-    },
-    {
-      "record": "E27",
-      "source": "S3",
-      "match": true
-    }
-  ],
   "price_comparison": {
     "date": "2026-11-11",
     "scenario": "Турция, 10 ГБ, 30 дней; только указанные цены пакетов",
-    "esim_mts_payment_rub": 718,
-    "t2_standard_roaming_rub": 3900,
-    "mts_personal_offer_rub": 646,
+    "inputs": [
+      {
+        "offer": "esim_mts_payment",
+        "price_rub": "718",
+        "country": "Турция",
+        "gb": "10",
+        "days": "30",
+        "kind": "факт",
+        "evidence": "E9",
+        "source": "S3",
+        "as_of": "2026-11-11",
+        "valid_from": ""
+      },
+      {
+        "offer": "t2_standard",
+        "price_rub": "3900",
+        "country": "Турция",
+        "gb": "10",
+        "days": "30",
+        "kind": "факт",
+        "evidence": "E11",
+        "source": "S4",
+        "as_of": "2026-11-11",
+        "valid_from": ""
+      },
+      {
+        "offer": "mts_personal",
+        "price_rub": "646",
+        "country": "Турция",
+        "gb": "10",
+        "days": "30",
+        "kind": "факт",
+        "evidence": "E18",
+        "source": "S8",
+        "as_of": "2026-11-11",
+        "valid_from": ""
+      },
+      {
+        "offer": "n_planned",
+        "price_rub": "590",
+        "country": "Турция",
+        "gb": "10",
+        "days": "30",
+        "kind": "прогноз",
+        "evidence": "E72",
+        "source": "S18",
+        "as_of": "2026-11-11",
+        "valid_from": "2026-12-01"
+      }
+    ],
+    "esim_mts_payment_rub": 718.0,
+    "t2_standard_roaming_rub": 3900.0,
+    "mts_personal_offer_rub": 646.0,
     "difference_roaming_minus_esim_rub": {
-      "t2_standard": 3182,
-      "mts_personal": -72
+      "t2_standard": 3182.0,
+      "mts_personal": -72.0
     },
     "limitations": [
-      "Один официальный источник на цену; оплата не выполнялась.",
-      "Разные поставщики: это ценовые ориентиры, не предложения N.",
-      "МТС 646 ₽ — региональная страница и персональное SMS-предложение.",
-      "Тарифные льготы и домашняя абонентская плата не включены.",
-      "Качество связи, скорость и доступность покупки не измерены.",
-      "Акция T2 с посуточным лимитом не эквивалентна 10 ГБ на 30 дней."
+      "Исторические снимки, один источник на цену; покупка не выполнялась.",
+      "Разные поставщики; не экономия клиента N и не сравнение качества.",
+      "МТС 646 ₽ — региональная страница и персональное предложение.",
+      "Домашняя плата и льготы не включены; цена партнёра N неизвестна."
     ]
-  }
+  },
+  "quote_verification": "Не запускалась; отдельный режим verify_and_compare.py --verify-quotes"
 }

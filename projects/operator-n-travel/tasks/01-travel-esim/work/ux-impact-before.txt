@@ -1,0 +1,269 @@
+Зависимости E9
+Уровень 1: E73 projects/operator-n-travel/evidence.md:465
+Уровень 1: E28 projects/operator-n-travel/evidence.md:1150
+Уровень 1: O3 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:48
+Уровень 1: C9 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:92
+Уровень 1: C1 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:99
+Уровень 1: C3 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:113
+Уровень 1: Q1 projects/operator-n-travel/tasks/01-travel-esim/questions.md:33
+Уровень 1: Q4 projects/operator-n-travel/tasks/01-travel-esim/questions.md:61
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:20 ## Аудитория и её работа
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:65 ## Ценность, затраты и доход
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:10 ## Новое и расчёт
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:14 ## Отношение к прежним сведениям
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:22 ## Что известно
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:90 ## Выводы
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:155 ## Противоречия
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:13 ## Почему
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:32 ## Ключевое сообщение и доказательство
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:81 ## Сравнение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:32 ## Альтернативы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:6 ## Меняет ли решение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:10 ## Коротко
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:11 ## Новые данные S18
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:21 ## Оформление и учебный расчёт 2026-11-12
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:163 ## Чего не знаем
+Уровень 2: D2 projects/operator-n-travel/decisions.md:11
+Уровень 2: D1 projects/operator-n-travel/decisions.md:28
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:48 ## Роль каналов
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:45 ## Выбранное направление
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:83 ## Риски и допущения
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:95 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:105 ## Что изменит рекомендацию
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:50 ## Вердикты по всем найденным разделам
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:91 ## Предложение и границы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:9 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:10 ## Что проверяем
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:98 ## Правило решения
+Уровень 2: O4 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:59
+Уровень 2: C6 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:134
+Уровень 2: O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:37
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:10 ## Критерии выбора
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:58 ## База сравнения
+Уровень 3: K7 projects/operator-n-travel/decisions.md:3
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:99 ## Приёмка уточнения S19
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:17 ## Подтверждение S19 и D2
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:25 ## Что делать дальше
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:31 ## Чего не знаем
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:72 ## Срок наблюдения
+Уровень 3: K1 projects/operator-n-travel/decisions.md:44
+Уровень 3: K2 projects/operator-n-travel/decisions.md:52
+Уровень 3: K3 projects/operator-n-travel/decisions.md:60
+Уровень 3: K4 projects/operator-n-travel/decisions.md:68
+Уровень 3: K5 projects/operator-n-travel/decisions.md:76
+Уровень 3: K6 projects/operator-n-travel/decisions.md:84
+Уровень 3: O5 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:70
+
+Зависимости E42
+Уровень 1: C8 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:148
+Уровень 1: Q8 projects/operator-n-travel/tasks/01-travel-esim/questions.md:20
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:45 ## Выбранное направление
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/scale-and-journey.md:31 ## Путь Travel eSIM билайна
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:22 ## Что известно
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:90 ## Выводы
+Уровень 2: D2 projects/operator-n-travel/decisions.md:11
+Уровень 2: D1 projects/operator-n-travel/decisions.md:28
+Уровень 2: O1 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:26
+Уровень 2: O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:37
+Уровень 2: O3 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:48
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:32 ## Ключевое сообщение и доказательство
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:10 ## Критерии выбора
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:81 ## Сравнение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:32 ## Альтернативы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:83 ## Риски и допущения
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:13 ## Почему
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:163 ## Чего не знаем
+Уровень 3: K7 projects/operator-n-travel/decisions.md:3
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:48 ## Роль каналов
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:95 ## Рекомендация
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:105 ## Что изменит рекомендацию
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:65 ## Ценность, затраты и доход
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:99 ## Приёмка уточнения S19
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:17 ## Подтверждение S19 и D2
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:21 ## Оформление и учебный расчёт 2026-11-12
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:9 ## Рекомендация
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:25 ## Что делать дальше
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:31 ## Чего не знаем
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:10 ## Что проверяем
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:72 ## Срок наблюдения
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:98 ## Правило решения
+Уровень 3: K1 projects/operator-n-travel/decisions.md:44
+Уровень 3: K2 projects/operator-n-travel/decisions.md:52
+Уровень 3: K3 projects/operator-n-travel/decisions.md:60
+Уровень 3: K4 projects/operator-n-travel/decisions.md:68
+Уровень 3: K5 projects/operator-n-travel/decisions.md:76
+Уровень 3: K6 projects/operator-n-travel/decisions.md:84
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:6 ## Меняет ли решение
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:91 ## Предложение и границы
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы
+
+Зависимости E65
+Уровень 1: E41 projects/operator-n-travel/evidence.md:783
+Уровень 1: C8 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:148
+Уровень 1: Q8 projects/operator-n-travel/tasks/01-travel-esim/questions.md:20
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:45 ## Выбранное направление
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/scale-and-journey.md:31 ## Путь Travel eSIM билайна
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:22 ## Что известно
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:90 ## Выводы
+Уровень 2: D2 projects/operator-n-travel/decisions.md:11
+Уровень 2: D1 projects/operator-n-travel/decisions.md:28
+Уровень 2: O1 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:26
+Уровень 2: O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:37
+Уровень 2: O3 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:48
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:32 ## Ключевое сообщение и доказательство
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:10 ## Критерии выбора
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:81 ## Сравнение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:10 ## Суть
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:32 ## Альтернативы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:83 ## Риски и допущения
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:13 ## Почему
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:163 ## Чего не знаем
+Уровень 3: K7 projects/operator-n-travel/decisions.md:3
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:48 ## Роль каналов
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:95 ## Рекомендация
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:105 ## Что изменит рекомендацию
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:65 ## Ценность, затраты и доход
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:99 ## Приёмка уточнения S19
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:17 ## Подтверждение S19 и D2
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:21 ## Оформление и учебный расчёт 2026-11-12
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:9 ## Рекомендация
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:25 ## Что делать дальше
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:31 ## Чего не знаем
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:10 ## Что проверяем
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:72 ## Срок наблюдения
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:98 ## Правило решения
+Уровень 3: K1 projects/operator-n-travel/decisions.md:44
+Уровень 3: K2 projects/operator-n-travel/decisions.md:52
+Уровень 3: K3 projects/operator-n-travel/decisions.md:60
+Уровень 3: K4 projects/operator-n-travel/decisions.md:68
+Уровень 3: K5 projects/operator-n-travel/decisions.md:76
+Уровень 3: K6 projects/operator-n-travel/decisions.md:84
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:6 ## Меняет ли решение
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:91 ## Предложение и границы
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы
+
+Зависимости C1
+Уровень 1: D2 projects/operator-n-travel/decisions.md:11
+Уровень 1: D1 projects/operator-n-travel/decisions.md:28
+Уровень 1: O4 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:59
+Уровень 1: C6 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:134
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:10 ## Суть
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:45 ## Выбранное направление
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:10 ## Коротко
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:90 ## Выводы
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:13 ## Почему
+Уровень 2: K7 projects/operator-n-travel/decisions.md:3
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:48 ## Роль каналов
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:95 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:105 ## Что изменит рекомендацию
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:65 ## Ценность, затраты и доход
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:99 ## Приёмка уточнения S19
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:17 ## Подтверждение S19 и D2
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:21 ## Оформление и учебный расчёт 2026-11-12
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:9 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:25 ## Что делать дальше
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:31 ## Чего не знаем
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:10 ## Что проверяем
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:72 ## Срок наблюдения
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:98 ## Правило решения
+Уровень 2: K1 projects/operator-n-travel/decisions.md:44
+Уровень 2: K2 projects/operator-n-travel/decisions.md:52
+Уровень 2: K3 projects/operator-n-travel/decisions.md:60
+Уровень 2: K4 projects/operator-n-travel/decisions.md:68
+Уровень 2: K5 projects/operator-n-travel/decisions.md:76
+Уровень 2: K6 projects/operator-n-travel/decisions.md:84
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:6 ## Меняет ли решение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:91 ## Предложение и границы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы
+Уровень 2: O5 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:70
+
+Зависимости C3
+Уровень 1: O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:37
+Уровень 1: C6 projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:134
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:10 ## Суть
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:32 ## Ключевое сообщение и доказательство
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:10 ## Критерии выбора
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:32 ## Альтернативы
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:10 ## Коротко
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:90 ## Выводы
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:155 ## Противоречия
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:58 ## База сравнения
+Уровень 2: O4 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:59
+Уровень 2: O5 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:70
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы
+Уровень 3: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+
+Зависимости C8
+Уровень 1: D2 projects/operator-n-travel/decisions.md:11
+Уровень 1: D1 projects/operator-n-travel/decisions.md:28
+Уровень 1: O1 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:26
+Уровень 1: O2 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:37
+Уровень 1: O3 projects/operator-n-travel/tasks/01-travel-esim/out/options.md:48
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:10 ## Суть
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:32 ## Ключевое сообщение и доказательство
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:10 ## Критерии выбора
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:24 ## Варианты
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:81 ## Сравнение
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:10 ## Суть
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:32 ## Альтернативы
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:83 ## Риски и допущения
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:18 ## Вердикты по выводам и выбору
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/situation.md:22 ## Что известно
+Уровень 1: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:13 ## Почему
+Уровень 2: K7 projects/operator-n-travel/decisions.md:3
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:48 ## Роль каналов
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/comms-strategy.md:62 ## Сверка обещаний с продуктом
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:95 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/options.md:105 ## Что изменит рекомендацию
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:45 ## Выбранное направление
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:65 ## Ценность, затраты и доход
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:99 ## Приёмка уточнения S19
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:5 ## Выбор и приёмка 2026-11-11
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:17 ## Подтверждение S19 и D2
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary-history.md:21 ## Оформление и учебный расчёт 2026-11-12
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:9 ## Рекомендация
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:21 ## Что отвергнуто
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:25 ## Что делать дальше
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/summary.md:31 ## Чего не знаем
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:10 ## Что проверяем
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:72 ## Срок наблюдения
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md:98 ## Правило решения
+Уровень 2: K1 projects/operator-n-travel/decisions.md:44
+Уровень 2: K2 projects/operator-n-travel/decisions.md:52
+Уровень 2: K3 projects/operator-n-travel/decisions.md:60
+Уровень 2: K4 projects/operator-n-travel/decisions.md:68
+Уровень 2: K5 projects/operator-n-travel/decisions.md:76
+Уровень 2: K6 projects/operator-n-travel/decisions.md:84
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:6 ## Меняет ли решение
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/revision-S18.md:91 ## Предложение и границы
+Уровень 2: projects/operator-n-travel/tasks/01-travel-esim/out/product-strategy.md:57 ## Сознательные отказы

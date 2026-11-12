@@ -1,0 +1,236 @@
+{
+  "kind": "оценка при учебных гипотезах; не прогноз и не измерение N",
+  "horizon": "условные 12 месяцев, единый для q и F",
+  "formula": "q * (r - w - v - c*l) - F",
+  "inputs": [
+    {
+      "parameter": "q",
+      "unit": "пакетов за 12 месяцев",
+      "cautious": "1000",
+      "base": "3000",
+      "bold": "6000",
+      "kind": "гипотеза",
+      "evidence": "E76",
+      "how_to_check": "Измерить оплаченные пакеты и достижимый поток в том же канале и отборе"
+    },
+    {
+      "parameter": "r",
+      "unit": "рублей на пакет",
+      "cautious": "600",
+      "base": "700",
+      "bold": "800",
+      "kind": "гипотеза",
+      "evidence": "E77",
+      "how_to_check": "Проверить относимый доход N после налогов и возвратов по модели договора"
+    },
+    {
+      "parameter": "w",
+      "unit": "рублей на пакет",
+      "cautious": "400",
+      "base": "350",
+      "bold": "300",
+      "kind": "гипотеза",
+      "evidence": "E78",
+      "how_to_check": "Проверить закупку которую действительно несёт N по договору"
+    },
+    {
+      "parameter": "v",
+      "unit": "рублей на пакет",
+      "cautious": "100",
+      "base": "80",
+      "bold": "60",
+      "kind": "гипотеза",
+      "evidence": "E79",
+      "how_to_check": "Проверить поддержку платежи привлечение и прочие переменные затраты"
+    },
+    {
+      "parameter": "c",
+      "unit": "доля пакетов",
+      "cautious": "0.7",
+      "base": "0.4",
+      "bold": "0.2",
+      "kind": "гипотеза",
+      "evidence": "E80",
+      "how_to_check": "Оценить замещение в контролируемом сравнении всех поездочных услуг"
+    },
+    {
+      "parameter": "l",
+      "unit": "рублей на замещённый пакет",
+      "cautious": "400",
+      "base": "300",
+      "bold": "200",
+      "kind": "гипотеза",
+      "evidence": "E81",
+      "how_to_check": "Измерить потерянный вклад роуминга по контролю без повторного вычета затрат"
+    },
+    {
+      "parameter": "F",
+      "unit": "рублей за 12 месяцев",
+      "cautious": "240000",
+      "base": "240000",
+      "bold": "240000",
+      "kind": "гипотеза",
+      "evidence": "E82",
+      "how_to_check": "Оценить постоянные затраты того же горизонта отдельно от лимита проверки"
+    }
+  ],
+  "scenarios": {
+    "cautious": {
+      "unit_incremental_rub": -180.0,
+      "incremental_contribution_rub": -180000.0,
+      "net_after_fixed_rub": -420000.0,
+      "break_even_packages": null
+    },
+    "base": {
+      "unit_incremental_rub": 150.0,
+      "incremental_contribution_rub": 450000.0,
+      "net_after_fixed_rub": 210000.0,
+      "break_even_packages": 1600
+    },
+    "bold": {
+      "unit_incremental_rub": 400.0,
+      "incremental_contribution_rub": 2400000.0,
+      "net_after_fixed_rub": 2160000.0,
+      "break_even_packages": 600
+    }
+  },
+  "sensitivity_method": "один вход ±20% относительно базового, остальные неизменны",
+  "sensitivity": [
+    {
+      "parameter": "r",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 560.0,
+          "net_rub": -210000.0,
+          "change_from_base_rub": -420000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 840.0,
+          "net_rub": 630000.0,
+          "change_from_base_rub": 420000.0
+        }
+      ],
+      "max_abs_change_rub": 420000.0
+    },
+    {
+      "parameter": "w",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 280.0,
+          "net_rub": 420000.0,
+          "change_from_base_rub": 210000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 420.0,
+          "net_rub": 0.0,
+          "change_from_base_rub": -210000.0
+        }
+      ],
+      "max_abs_change_rub": 210000.0
+    },
+    {
+      "parameter": "q",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 2400.0,
+          "net_rub": 120000.0,
+          "change_from_base_rub": -90000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 3600.0,
+          "net_rub": 300000.0,
+          "change_from_base_rub": 90000.0
+        }
+      ],
+      "max_abs_change_rub": 90000.0
+    },
+    {
+      "parameter": "c",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 0.32,
+          "net_rub": 282000.0,
+          "change_from_base_rub": 72000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 0.48,
+          "net_rub": 138000.0,
+          "change_from_base_rub": -72000.0
+        }
+      ],
+      "max_abs_change_rub": 72000.0
+    },
+    {
+      "parameter": "l",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 240.0,
+          "net_rub": 282000.0,
+          "change_from_base_rub": 72000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 360.0,
+          "net_rub": 138000.0,
+          "change_from_base_rub": -72000.0
+        }
+      ],
+      "max_abs_change_rub": 72000.0
+    },
+    {
+      "parameter": "v",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 64.0,
+          "net_rub": 258000.0,
+          "change_from_base_rub": 48000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 96.0,
+          "net_rub": 162000.0,
+          "change_from_base_rub": -48000.0
+        }
+      ],
+      "max_abs_change_rub": 48000.0
+    },
+    {
+      "parameter": "F",
+      "cases": [
+        {
+          "factor": "0.8",
+          "value": 192000.0,
+          "net_rub": 258000.0,
+          "change_from_base_rub": 48000.0
+        },
+        {
+          "factor": "1.2",
+          "value": 288000.0,
+          "net_rub": 162000.0,
+          "change_from_base_rub": -48000.0
+        }
+      ],
+      "max_abs_change_rub": 48000.0
+    }
+  ],
+  "base_max_c_for_nonnegative_net": 0.6333333333333333,
+  "limitations": [
+    "Сценариям не назначены вероятности; это сочетания допущений.",
+    "r — доход N после налогов и возвратов, не обязательно розничная цена.",
+    "590 ₽ — цена планового пакета, не потерянный вклад l.",
+    "F — учебные постоянные затраты; не утверждённый лимит проверки.",
+    "При агентской модели r — комиссия, w=0 если закупку несёт партнёр.",
+    "Измеренная разность всех услуг теста и контроля уже включает замещение: c*l второй раз не вычитать.",
+    "Не масштабировать на весь поток поездок; закрытые числа N не запрашивались."
+  ]
+}
