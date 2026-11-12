@@ -1,0 +1,19 @@
+{
+  "files": [
+    {
+      "file": "projects/operator-n-travel/tasks/01-travel-esim/out/summary.md",
+      "visible_words": 396,
+      "max_phrase_words": 17,
+      "local_links": 15,
+      "visible_service_notation": []
+    },
+    {
+      "file": "projects/operator-n-travel/tasks/01-travel-esim/out/test-plan.md",
+      "visible_words": 1126,
+      "max_phrase_words": 17,
+      "local_links": 24,
+      "visible_service_notation": []
+    }
+  ],
+  "failures": []
+}

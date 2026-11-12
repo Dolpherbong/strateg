@@ -1,0 +1,42 @@
+{
+  "source_sha256": "e7ba76c65015c2f1467687c898886a8a63589db0c4ad8429d7fbbeab763b5a12",
+  "claims_total": 41,
+  "verdict_counts": {
+    "подтверждено": 27,
+    "шире опоры": 2,
+    "нечем подтвердить": 11,
+    "устарело": 1
+  },
+  "central_m": 180,
+  "scenarios": [
+    {
+      "m": 80,
+      "c": 0.5,
+      "u": -270.0,
+      "year_result": -31200000.0,
+      "break_even_trips": null
+    },
+    {
+      "m": 180,
+      "c": 0.2,
+      "u": 40.0,
+      "year_result": -200000.0,
+      "break_even_trips": 105000.0
+    },
+    {
+      "m": 300,
+      "c": 0.1,
+      "u": 230.0,
+      "year_result": 18800000.0,
+      "break_even_trips": 18260.869565217392
+    }
+  ],
+  "central_cannibalization_boundary": 0.2571428571428571,
+  "illustrative_trips": 27000.0,
+  "illustrative_year_result": -3120000.0,
+  "sample_size_per_group_normal_approx": 6419.354777562655,
+  "sample_size_assumptions": "Two-sided normal approximation, Bonferroni for 2 comparisons; not power for profit.",
+  "twelve_weeks_from_2026_11_11": "2027-02-03",
+  "last_departure_plus_44_days": "2027-03-19",
+  "note": "Conditional arithmetic only; input values are author assumptions, not measurements or N forecasts."
+}

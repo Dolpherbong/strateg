@@ -1,0 +1,34 @@
+[
+  {
+    "file": "sources.md",
+    "records": 36,
+    "changed": true,
+    "fields_preserved": true,
+    "all_original_lines_preserved": true,
+    "backup": "projects/operator-n-travel/tasks/01-travel-esim/work/archive/sources.md.before-order-2026-11-12.txt"
+  },
+  {
+    "file": "evidence.md",
+    "records": 140,
+    "changed": true,
+    "fields_preserved": true,
+    "all_original_lines_preserved": true,
+    "backup": "projects/operator-n-travel/tasks/01-travel-esim/work/archive/evidence.md.before-order-2026-11-12.txt"
+  },
+  {
+    "file": "decisions.md",
+    "records": 9,
+    "changed": true,
+    "fields_preserved": true,
+    "all_original_lines_preserved": true,
+    "backup": "projects/operator-n-travel/tasks/01-travel-esim/work/archive/decisions.md.before-order-2026-11-12.txt"
+  },
+  {
+    "file": "tasks/01-travel-esim/questions.md",
+    "records": 10,
+    "changed": true,
+    "fields_preserved": true,
+    "all_original_lines_preserved": true,
+    "backup": "projects/operator-n-travel/tasks/01-travel-esim/work/archive/questions.md.before-order-2026-11-12.txt"
+  }
+]
