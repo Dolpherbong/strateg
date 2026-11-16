@@ -160,6 +160,30 @@ class ChecksTests(unittest.TestCase):
         write(path, path.read_text(encoding="utf-8").replace("статус: действует", "статус: отозвано\n- причина: ошибка"))
         self.assertIn("V07", self.codes(task))
 
+    def test_v07_skips_dated_reports_and_closed_questions(self) -> None:
+        """Dated reports in out/ and answered questions are history; the six final documents are not."""
+        from tools.lib.checks import check
+        task = clean(self.root)
+        evidence = task.parents[1] / "evidence.md"
+        write(evidence, evidence.read_text(encoding="utf-8").replace(
+            "статус: действует", "статус: устарело\n- заменено: E2") + record("E2"))
+        report = task / "out" / "revision-S9.md"
+        write(report, "# Пересмотр\n\nБыло [E1].\n")
+        questions = task / "questions.md"
+        closed = record("Q1", **{"вопрос": "Какова цена?", "зачем": "выбор", "что изменит ответ": "вариант",
+                                 "где искать": "сайт", "ответ": "[E1]", "статус": "закрыт"})
+        write(questions, closed)
+        paths = {report, questions}
+        issues = [i for i in check(self.root, task.parents[1], task) if i.code == "V07" and i.path in paths]
+        self.assertEqual(issues, [])
+        write(questions, closed.replace("статус: закрыт", "статус: открыт"))
+        issues = [i for i in check(self.root, task.parents[1], task) if i.code == "V07" and i.path == questions]
+        self.assertEqual([i.subject for i in issues], ["Q1"])
+        summary = task / "out" / "summary.md"
+        write(summary, summary.read_text(encoding="utf-8") + "\nСсылка [E1].\n")
+        issues = [i for i in check(self.root, task.parents[1], task) if i.code == "V07" and i.path == summary]
+        self.assertEqual([i.subject for i in issues], ["E1"])
+
     def test_v07_commitment_of_revised_decision(self) -> None:
         """Verify an open commitment of a revised decision must move to the successor or close."""
         task = clean(self.root)

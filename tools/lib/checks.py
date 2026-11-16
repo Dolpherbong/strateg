@@ -190,17 +190,27 @@ def _out(path: Path, project: Path) -> bool:
     return len(parts) == 4 and parts[0] == "tasks" and parts[2] == "out"
 
 
-def _outdated(project: Path, data: Project, index: dict[str, Record]) -> list[Issue]:
+def _final_names(root: Path) -> set[str]:
+    """Names of the final documents: one per form in templates/out."""
+    return {path.name for path in (root / "templates/out").glob("*.md")}
+
+
+def _outdated(root: Path, project: Path, data: Project, index: dict[str, Record]) -> list[Issue]:
+    """Flag active records and final documents that cite outdated or withdrawn records.
+
+    Answered questions and dated reports in out/ (revisions, checks) are history and are skipped.
+    """
     issues = []
     old = {key for key, item in index.items() if item.fields.get("статус") in ("устарело", "отозвано")}
-    inactive = ("устарело", "отозвано", "пересмотрено", "отменено", "снят", "снято", "выполнено", "сорвано")
+    inactive = ("устарело", "отозвано", "пересмотрено", "отменено", "снят", "снято", "выполнено", "сорвано", "закрыт")
     for record in data.records:
         if record.fields.get("статус") not in inactive:
             for ref in record.refs:
                 if ref in old:
                     issues.append(_issue("V07", record, f"ссылка на устаревшую или отозванную запись {ref}"))
+    finals = _final_names(root)
     for path, text in data.documents.items():
-        if _out(path, project):
+        if _out(path, project) and path.name in finals:
             for ref in references(_outside_records(path, text, data.records)):
                 if ref in old:
                     issues.append(Issue("V07", path, ref, "итоговый документ ссылается на устаревшую или отозванную запись"))
@@ -375,7 +385,7 @@ def check(root: Path, project: Path, task: Path, final: bool = False) -> tuple[I
             issues.extend(_evidence(record))
         if record.id.startswith("C"):
             issues.extend(_conclusion(record, index))
-    issues.extend(_outdated(project, data, index))
+    issues.extend(_outdated(root, project, data, index))
     issues.extend(_revised_commitments(data, index))
     issues.extend(_options(task, data, final))
     issues.extend(_state(root, task))
