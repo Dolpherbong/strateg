@@ -216,20 +216,33 @@ def _listed_commitments(text: str) -> set[str]:
     return found
 
 
+def _successor(decision: Record, index: dict[str, Record]) -> Record | None:
+    """Follow «заменено» links from a revised decision to the active one, if any."""
+    seen, current = set(), decision
+    while current.fields.get("статус") == "пересмотрено" and current.id not in seen:
+        seen.add(current.id)
+        nxt = next(iter(references(f"- заменено: {current.fields.get('заменено', '')}")), None)
+        if nxt is None or nxt not in index:
+            return None
+        current = index[nxt]
+    return current if current.fields.get("статус") == "действует" else None
+
+
 def _revised_commitments(data: Project, index: dict[str, Record]) -> list[Issue]:
-    """Flag open commitments left on a revised decision and not carried to an active one."""
-    carried = set()
-    for record in data.records:
-        if record.id.startswith("D") and record.fields.get("статус") == "действует":
-            carried |= _listed_commitments(record.fields.get("обязательства", ""))
+    """Flag open commitments left on a revised decision and not carried to its successor."""
     issues = []
     for record in data.records:
-        if not record.id.startswith("K") or record.fields.get("статус") != "открыто" or record.id in carried:
+        if not record.id.startswith("K") or record.fields.get("статус") != "открыто":
             continue
         for ref in references(f"- к решению: {record.fields.get('к решению', '')}"):
-            if index.get(ref) is not None and index[ref].fields.get("статус") == "пересмотрено":
+            decision = index.get(ref)
+            if decision is None or decision.fields.get("статус") != "пересмотрено":
+                continue
+            successor = _successor(decision, index)
+            if successor is None or record.id not in _listed_commitments(successor.fields.get("обязательства", "")):
                 issues.append(_issue("V07", record, f"открытое обязательство осталось у пересмотренного решения {ref}: "
-                                                    "перечисли его в поле «обязательства» действующего решения или сними"))
+                                                    "перечисли его в поле «обязательства» решения, которое его заменило, "
+                                                    "или сними"))
     return issues
 
 

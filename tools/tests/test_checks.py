@@ -177,6 +177,14 @@ class ChecksTests(unittest.TestCase):
         carried = successor.replace("- статус: действует\n", "- статус: действует\n- обязательства: K1–K3 продолжаются под D2\n")
         write(path, revised + carried)
         self.assertNotIn("V07", self.codes(task))
+        unrelated = record("D3", **{
+            "решение": "другое направление", "дата": "2026-11-13",
+            "кто решил": "руководитель продукта", "выбран вариант": "O3", "основания": "C1",
+            "отвергнуто": "остальные", "ответственный": "аналитик", "показатель": "спрос",
+            "срок проверки": "2000-01-01", "условие пересмотра": "спроса нет", "статус": "действует",
+            "обязательства": "K1 продолжается под D3"})
+        write(path, revised + successor + unrelated)
+        self.assertIn("V07", self.codes(task))
         write(path, revised.replace("- статус: открыто", "- статус: снято") + successor)
         self.assertNotIn("V07", self.codes(task))
 
