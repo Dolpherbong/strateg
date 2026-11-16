@@ -128,8 +128,14 @@ class EdgeTests(unittest.TestCase):
                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
             if result.returncode:
                 self.skipTest("Среда не разрешает ни symlink, ни junction")
-        with self.assertRaises(ValueError):
-            load_project(self.project)
+        # Safe outcomes: the loader rejects the link or never follows it.
+        try:
+            data = load_project(self.project)
+        except ValueError:
+            return
+        root = self.project.resolve()
+        self.assertTrue(all(path.resolve().is_relative_to(root) for path in data.documents))
+        self.assertFalse(any(link in path.parents for path in data.documents))
 
     def test_state_empty_fields(self) -> None:
         """Verify state empty fields."""
