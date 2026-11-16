@@ -207,6 +207,32 @@ def _outdated(project: Path, data: Project, index: dict[str, Record]) -> list[Is
     return issues
 
 
+def _listed_commitments(text: str) -> set[str]:
+    """Read commitment numbers, including ranges such as K1–K6, from free text."""
+    found = set()
+    for first, last in re.findall(r"(?<![\w])K(\d+)\s*[–—-]\s*K?(\d+)(?![\w])", text):
+        found.update(f"K{number}" for number in range(int(first), int(last) + 1))
+    found.update(re.findall(r"(?<![\w])K\d+(?![\w])", text))
+    return found
+
+
+def _revised_commitments(data: Project, index: dict[str, Record]) -> list[Issue]:
+    """Flag open commitments left on a revised decision and not carried to an active one."""
+    carried = set()
+    for record in data.records:
+        if record.id.startswith("D") and record.fields.get("статус") == "действует":
+            carried |= _listed_commitments(record.fields.get("обязательства", ""))
+    issues = []
+    for record in data.records:
+        if not record.id.startswith("K") or record.fields.get("статус") != "открыто" or record.id in carried:
+            continue
+        for ref in references(f"- к решению: {record.fields.get('к решению', '')}"):
+            if index.get(ref) is not None and index[ref].fields.get("статус") == "пересмотрено":
+                issues.append(_issue("V07", record, f"открытое обязательство осталось у пересмотренного решения {ref}: "
+                                                    "перечисли его в поле «обязательства» действующего решения или сними"))
+    return issues
+
+
 def _outside_records(path: Path, text: str, records: tuple[Record, ...]) -> str:
     lines = text.splitlines(keepends=True)
     for record in records:
@@ -337,6 +363,7 @@ def check(root: Path, project: Path, task: Path, final: bool = False) -> tuple[I
         if record.id.startswith("C"):
             issues.extend(_conclusion(record, index))
     issues.extend(_outdated(project, data, index))
+    issues.extend(_revised_commitments(data, index))
     issues.extend(_options(task, data, final))
     issues.extend(_state(root, task))
     if final:

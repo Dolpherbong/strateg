@@ -160,6 +160,26 @@ class ChecksTests(unittest.TestCase):
         write(path, path.read_text(encoding="utf-8").replace("статус: действует", "статус: отозвано\n- причина: ошибка"))
         self.assertIn("V07", self.codes(task))
 
+    def test_v07_commitment_of_revised_decision(self) -> None:
+        """Verify an open commitment of a revised decision must move to the successor or close."""
+        task = clean(self.root)
+        path = task.parents[1] / "decisions.md"
+        revised = path.read_text(encoding="utf-8").replace(
+            "- статус: действует", "- статус: пересмотрено\n- заменено: D2", 1)
+        successor = record("D2", **{
+            "решение": "проверить подписку дешевле", "дата": "2026-11-12",
+            "кто решил": "руководитель продукта", "выбран вариант": "O3", "основания": "C1",
+            "отвергнуто": "остальные", "ответственный": "аналитик", "показатель": "спрос",
+            "срок проверки": "2000-01-01", "условие пересмотра": "спроса нет", "статус": "действует",
+            "предыдущее решение": "[D1]"})
+        write(path, revised + successor)
+        self.assertIn("V07", self.codes(task))
+        carried = successor.replace("- статус: действует\n", "- статус: действует\n- обязательства: K1–K3 продолжаются под D2\n")
+        write(path, revised + carried)
+        self.assertNotIn("V07", self.codes(task))
+        write(path, revised.replace("- статус: открыто", "- статус: снято") + successor)
+        self.assertNotIn("V07", self.codes(task))
+
     def test_v08_confidence_support(self) -> None:
         """Verify v08 confidence support."""
         task = clean(self.root)
