@@ -1,0 +1,168 @@
+### calc_baseline.py
+== Active gap decomposition (base year, plan vs estimate) ==
+  rate_plan: 0.667
+  rate_est: 0.615
+  volume_part: -666.667
+  rate_part: -333.333
+  total: -1000.000
+== Coverage shares ==
+  fam_est_base: 6.5%
+  own_est_base: 2.0%
+  fam_nochange: 8.0%
+  own_nochange: 2.5%
+  fam_target: 12.0%
+  own_target: 5.0%
+== Targets bridge ==
+  fam_net_growth_to_target: 5,500.000
+  fam_gap_target_vs_nochange: 4,000.000
+  active_rate_needed: 0.667
+  active_rate_nochange: 0.625
+  active_rate_base: 0.615
+  active_if_target_conn_at_nochange_rate: 7,500.000
+  gp_gap_mln: 6.000
+  paid_months_needed: 12,000.000
+  gp_base_gap_mln: 7.000
+  owners_gap_target_vs_nochange: 1,000.000
+== Numbers in groups (assumption 2.5-3.5 per group) ==
+  est_base: 16,250-22,750
+  nochange: 20,000-28,000
+  target: 30,000-42,000
+== Problem sizing, base-year connected (6 500 groups, 800 owners) ==
+  P1 low-balance events per year (group-months): 11,700-27,300
+  P1 restrictions per year (no help): 1,053-4,095
+  P2 groups with unclear charge per year: 1,300-2,275
+  P3 groups with participant blocked for non-payment: 325-975
+  P4 device stops for non-payment per year: 96-560
+  P4 if offered to all accessible owners: 4,800-28,000
+== P1 generous profit ceiling, full year, groups at no-change level 8 000 ==
+  restrictions_high: 5,040.00
+  months_ceiling: 8,820.00
+  gp_ceiling_mln: 4.41
+
+### calc_options.py
+== Groups per arm (alpha 5 %, power 80 %) ==
+  12% -> 9%: 1638 per arm, 3276 total
+  12% -> 8%: 882 per arm, 1764 total
+  12% -> 7%: 539 per arm, 1078 total
+  15% -> 10%: 686 per arm, 1372 total
+== Eligible group-months per week vs distinct first-time groups ==
+  low 15% elig 30%:    68 group-months/wk; 13 wk:   878 group-months vs   752 distinct; first-week distinct   72; weeks to 1078:  21.5; to 3276: pool too small
+  low 15% elig 50%:   112 group-months/wk; 13 wk:  1462 group-months vs  1254 distinct; first-week distinct  120; weeks to 1078:  10.7; to 3276: pool too small
+  low 15% elig 70%:   158 group-months/wk; 13 wk:  2048 group-months vs  1756 distinct; first-week distinct  167; weeks to 1078:   7.2; to 3276:  33.9
+  low 25% elig 30%:   112 group-months/wk; 13 wk:  1462 group-months vs  1127 distinct; first-week distinct  125; weeks to 1078:  12.1; to 3276: pool too small
+  low 25% elig 50%:   188 group-months/wk; 13 wk:  2438 group-months vs  1879 distinct; first-week distinct  209; weeks to 1078:   6.1; to 3276: pool too small
+  low 25% elig 70%:   262 group-months/wk; 13 wk:  3412 group-months vs  2630 distinct; first-week distinct  292; weeks to 1078:   4.1; to 3276:  19.2
+  low 35% elig 30%:   158 group-months/wk; 13 wk:  2048 group-months vs  1414 distinct; first-week distinct  185; weeks to 1078:   8.1; to 3276: pool too small
+  low 35% elig 50%:   262 group-months/wk; 13 wk:  3412 group-months vs  2357 distinct; first-week distinct  308; weeks to 1078:   4.1; to 3276: pool too small
+  low 35% elig 70%:   368 group-months/wk; 13 wk:  4778 group-months vs  3300 distinct; first-week distinct  431; weeks to 1078:   2.7; to 3276:  12.8
+== Probability of each decision outcome, 539 per arm, control 12 % ==
+  true effect 0 p.p. (SE 1.98): extend 0.6%; positive below 5 1.9%; inconclusive 26.1%; stop 68.9%; harm 2.5%
+  true effect 3 p.p. (SE 1.87): extend 14.2%; positive below 5 22.1%; inconclusive 45.0%; stop 18.7%; harm 0.0%
+  true effect 5 p.p. (SE 1.78): extend 50.0%; positive below 5 30.2%; inconclusive 17.3%; stop 2.5%; harm 0.0%
+  true effect 7 p.p. (SE 1.69): extend 88.2%; positive below 5 10.4%; inconclusive 1.3%; stop 0.1%; harm 0.0%
+== O5 paid-month ceiling, full year ==
+  linked   1000: 11-350 months, 0.01-0.17 mln RUB
+  linked   2000: 22-700 months, 0.01-0.35 mln RUB
+  linked   4000: 43-1,400 months, 0.02-0.70 mln RUB
+  linked  40000: 432-14,000 months, 0.22-7.00 mln RUB
+== Value per prevented event, RUB ==
+  O5 stop: 150-500 (0.3-1 paid month of one number)
+  O3 restriction, add-on margin 100: -50 to 140
+  O3 restriction, add-on margin 200: -100 to 130
+  O3 restriction, add-on margin 300: -150 to 120
+
+### calc_strategy.py
+== Funnel without changes: 6 500 + new - exits = 8 000 ==
+  churn 10% accept 70%: exits 650, new 2,150, created 3,071, activated 1,382
+    app      created  1,843, conversion 3.3%-5.0%
+    sales    created    768, conversion 3.8%-7.7%
+    support  created    461, conversion 4.6%-9.2%
+  churn 15% accept 62%: exits 975, new 2,475, created 3,992, activated 1,796
+    app      created  2,395, conversion 4.3%-6.5%
+    sales    created    998, conversion 5.0%-10.0%
+    support  created    599, conversion 6.0%-12.0%
+  churn 20% accept 55%: exits 1,300, new 2,800, created 5,091, activated 2,291
+    app      created  3,055, conversion 5.5%-8.3%
+    sales    created  1,273, conversion 6.4%-12.7%
+    support  created    764, conversion 7.6%-15.3%
+== Own forecast, plan year (Q4 rollout, 90 % of eligible groups get the signal) ==
+  main: connected 8000, active 5,151.88 (+151.88 from Q4 rollout), activation 45 %, owners 1 000
+  less favourable: connected 6,933.33, active 4,266.67 (no rollout), activation 42 %, owners 800, GP 272.074 mln
+  upper bound of active uplift: +396.90
+  Q4 signalled cases 2,700, prevented 135; GP before costs -20,250 to +18,900 RUB; after direct costs -36,450 to +17,820 RUB
+  pilot signal arm (first events only): -7,276 to +3,557 RUB; plan-year bridge 278.9563-279.0214 mln before development cost
+  months needed for +6 mln with Q4 costs 1,080 RUB and lost margin 8,100 RUB: 12,018
+  months needed for +6 mln with Q4 costs 16,200 RUB and lost margin 8,100 RUB: 12,049
+== Full year at scale, 8 000 groups, 90 % coverage, 5 p.p. absolute ==
+  cautious: cases 3,888, prevented 194.4/yr, net -150 RUB/event, GP before costs -29,160; after costs -52,488 to -30,715 RUB/yr; cumulative to end 2029 0-0
+    strong retention link (3.5 numbers keep 1 month, minus 150 RUB add-on loss): +287,712 to +309,485 RUB/yr; cumulative to end 2029 647,352-696,341
+  base    : cases 10,800, prevented 540.0/yr, net -10 RUB/event, GP before costs -5,400; after costs -70,200 to -9,720 RUB/yr; cumulative to end 2029 0-0
+    strong retention link (3.5 numbers keep 1 month, minus 60 RUB add-on loss): +847,800 to +908,280 RUB/yr; cumulative to end 2029 1,907,550-2,043,630
+  bold    : cases 21,168, prevented 1,058.4/yr, net +140 RUB/event, GP before costs +148,176; after costs +21,168 to +139,709 RUB/yr; cumulative to end 2029 47,628-314,345
+    strong retention link (3.5 numbers keep 1 month, minus 10 RUB add-on loss): +1,714,608 to +1,833,149 RUB/yr; cumulative to end 2029 3,857,868-4,124,585
+  break-even months saved per event: cannibal 30%, margin 200: 0.12 before costs
+  break-even months saved per event: cannibal 50%, margin 300: 0.30 before costs
+  break-even months saved per event: cannibal 10%, margin 100: 0.02 before costs
+  direct costs per prevented restriction 8-120 RUB = 0.016-0.240 paid months
+== Expected reduction vs 5 p.p. threshold (upper: every timely transfer prevents) ==
+  baseline 9%: 2.7-5.4 p.p. (timely 30-60 %); needed for 5 p.p.: 55.6%
+  baseline 12%: 3.6-7.2 p.p. (timely 30-60 %); needed for 5 p.p.: 41.7%
+  baseline 15%: 4.5-9.0 p.p. (timely 30-60 %); needed for 5 p.p.: 33.3%
+== Recruitment pace for 1 078 distinct groups, start 1 June 2027, 7 days observation ==
+  decision 15 Aug: 9.71 weeks, 111.0 groups/week
+  decision 15 Sep: 14.14 weeks, 76.2 groups/week
+  decision 30 Sep: 16.29 weeks, 66.2 groups/week
+  at 60/week: recruitment 18.0 weeks, result from 2027-10-11
+  at 79/week: recruitment 13.6 weeks, result from 2027-09-11
+  at 80/week: recruitment 13.5 weeks, result from 2027-09-10
+  at 188/week: recruitment 5.7 weeks, result from 2027-07-18
+  at 368/week: recruitment 2.9 weeks, result from 2027-06-28
+  95 % CI half-width, 539 per arm, 12% vs 12%: +/-3.9 p.p.
+  95 % CI half-width, 539 per arm, 12% vs 7%: +/-3.5 p.p.
+
+### calc_gaps.py
+== 1. Cost per additional connection (E55) ==
+  spend = reach x cost per shown offer; extra = reach x incremental conversion (audit item 12: spend no longer mixes low and high conversion)
+  app      CAC 25-400 RUB; extra groups/yr 185-1,120; spend 18.5-112.0 thousand RUB
+    low reach, cost 0.5, incr 2.0%: spend 18.5 thousand, extra 740, per group 25
+    low reach, cost 2.0, incr 0.5%: spend 74.0 thousand, extra 185, per group 400
+    high reach, cost 0.5, incr 2.0%: spend 28.0 thousand, extra 1,120, per group 25
+    high reach, cost 2.0, incr 0.5%: spend 112.0 thousand, extra 280, per group 400
+  sales    CAC 500-4,000 RUB; extra groups/yr 200-1,200; spend 300.0-1,600.0 thousand RUB
+    low reach, cost 30.0, incr 6.0%: spend 300.0 thousand, extra 600, per group 500
+    low reach, cost 80.0, incr 2.0%: spend 800.0 thousand, extra 200, per group 4,000
+    high reach, cost 30.0, incr 6.0%: spend 600.0 thousand, extra 1,200, per group 500
+    high reach, cost 80.0, incr 2.0%: spend 1,600.0 thousand, extra 400, per group 4,000
+  support  CAC 333-3,000 RUB; extra groups/yr 100-600; spend 100.0-600.0 thousand RUB
+    low reach, cost 20.0, incr 6.0%: spend 100.0 thousand, extra 300, per group 333
+    low reach, cost 60.0, incr 2.0%: spend 300.0 thousand, extra 100, per group 3,000
+    high reach, cost 20.0, incr 6.0%: spend 200.0 thousand, extra 600, per group 333
+    high reach, cost 60.0, incr 2.0%: spend 600.0 thousand, extra 200, per group 3,000
+  all channels: extra 485-2,920 groups/yr, spend 418.5-2,312.0 thousand RUB
+  break-even CAC if a new group keeps 0.5 extra paid month on 2.5 numbers: 625 RUB
+  break-even CAC if a new group keeps 1.0 extra paid month on 3.0 numbers: 1,500 RUB
+  break-even CAC if a new group keeps 2.0 extra paid month on 3.5 numbers: 3,500 RUB
+== 2. Direct costs of signals, full year, 8 000 groups (E57) ==
+  cautious: costs 0.0017-0.0259 mln/yr at full coverage
+  base    : costs 0.0048-0.0720 mln/yr at full coverage
+  bold    : costs 0.0094-0.1411 mln/yr at full coverage
+  per case 0.4-6.0 RUB; pilot signal arm, 539 first events: 216-3,234 RUB; repeat and unsent signals counted separately
+== 3. Price of closing gaps ==
+  connected groups: gap 4,000; existing channels give 485-2,920; uncovered 1,080-3,515
+    if all 4 000 at CAC 500 RUB: 2.0 mln RUB
+    if all 4 000 at CAC 1000 RUB: 4.0 mln RUB
+    if all 4 000 at CAC 2000 RUB: 8.0 mln RUB
+    with retention: up to 2,920 new + 650-1 300 avoided exits (E45) = 3,570-4,220 before overlap corrections; price = channel spend + retention cost + remainder x new-channel CAC (last two unknown)
+  active groups: main forecast 5,151.875 (signal 151.875); +2,500 with new groups at 62.5 %; +75.938 extra signal on new groups = 7,727.812; remainder 272.188
+    upper scenario: 7 500 + signal 595.350 = 8,095.4; remainder 0.0
+    price of the remainder: remainder x cost per extra active group; cost per extra active group unknown (needs the pilot difference in monthly activity)
+  activation 60 % = accepted-in-time x acting-in-time: acceptance 55% -> 109.1% of accepted must act (impossible)
+  activation 60 % = accepted-in-time x acting-in-time: acceptance 60% -> 100.0% of accepted must act
+  activation 60 % = accepted-in-time x acting-in-time: acceptance 62% -> 96.8% of accepted must act
+  activation 60 % = accepted-in-time x acting-in-time: acceptance 70% -> 85.7% of accepted must act
+    minimum acceptance is 60 % at 100 % acting; 62 % corresponds to ~97 % acting
+    Q4 cohort 768 groups: +15 p.p. = 115 groups; reminder SMS 1,535-4,605 RUB per quarter
+    Q4 cohort 1,272 groups: +15 p.p. = 191 groups; reminder SMS 2,545-7,635 RUB per quarter
+  owners: gap 1,000; reach 40% of 39,000 -> incremental linking 6.4%; offer cost at 0.5-2 RUB 8-31 thousand RUB
+  owners: gap 1,000; reach 70% of 39,000 -> incremental linking 3.7%; offer cost at 0.5-2 RUB 14-55 thousand RUB
+
