@@ -2,7 +2,7 @@
 
 **Вторая версия требует доработки перед сдачей жюри.** Подготовка в первом квартале обоснована. Для решения о пилоте и расширении нужно свести календарь, правила эксперимента и экономику. Из 26 пунктов первой проверки 8 исправлены полностью, 18 частично. Полностью неисправленных пунктов и обоснованных отказов от исправления целого пункта нет. Отсутствие данных об удержании, ценах и реальном потоке признано там, где без них можно дать только условный расчёт.
 
-Д означает номер строки [версии 2](../runs/run-9-brief/strateg/projects/operator-n-family/tasks/01-family-devices/out/deliverable.md), Б означает строку [брифа](../research/brief-megafon.md). E относится к [реестру сведений](../runs/run-9-brief/strateg/projects/operator-n-family/evidence.md), D и K в латинице относятся к [решениям и обязательствам](../runs/run-9-brief/strateg/projects/operator-n-family/decisions.md). Сверены [первая проверка](brief-audit-report.md), [версия 1](../runs/run-9-brief/strateg/projects/operator-n-family/tasks/01-family-devices/work/archive/deliverable-v1-2026-11-19.md), [ответ s13](../runs/run-9-brief/s13-audit.md), [подтверждение s14](../runs/run-9-brief/s14-confirm.md), [отчёт агента о правках](../runs/run-9-brief/strateg/projects/operator-n-family/tasks/01-family-devices/out/revision-2026-11-19-audit.md) и [план проверки](../runs/run-9-brief/strateg/projects/operator-n-family/tasks/01-family-devices/out/test-plan.md). Бриф сверен по расшифровке.
+Д означает номер строки версии 2, Б означает строку брифа. E относится к реестру сведений, D и K в латинице относятся к решениям и обязательствам. Сверены первая проверка, версия 1, ответ s13, подтверждение s14, отчёт агента о правках и план проверки. Бриф сверен по расшифровке.
 
 ## Воспроизведение в копии
 
@@ -10,12 +10,12 @@
 
 | Запуск | Вывод |
 |---|---|
-| calc_baseline.py | [Таблицы брифа, разрывы и размеры проблем](brief-audit2-tmp/projects/operator-n-family/tasks/01-family-devices/work/calc_baseline.audit2.txt) |
-| calc_gaps.py | [Каналы, расходы пилота и цена разрывов](brief-audit2-tmp/projects/operator-n-family/tasks/01-family-devices/work/calc_gaps.audit2.txt) |
-| calc_options.py | [Выборка, уникальный набор, вероятности решений и владельцы](brief-audit2-tmp/projects/operator-n-family/tasks/01-family-devices/work/calc_options.audit2.txt) |
-| calc_strategy.py | [Воронка, прогноз, экономика и календарь](brief-audit2-tmp/projects/operator-n-family/tasks/01-family-devices/work/calc_strategy.audit2.txt) |
-| py tools/strateg.py check --final | Код 0. V01-V12 равны 0, нарушений 0. Системный py не нашёл зарегистрированный Python. Точная команда выполнена в созданном внутри копии окружении Python 3.11.0. [Вывод](brief-audit2-tmp/check-final-audit2.txt) |
-| Независимый пересчёт по входным допущениям | [Календарь с временем суток, биномиальные вероятности, суммы по кварталам и границы](brief-audit2-tmp/independent-audit2.txt) |
+| calc_baseline.py | Таблицы брифа, разрывы и размеры проблем |
+| calc_gaps.py | Каналы, расходы пилота и цена разрывов |
+| calc_options.py | Выборка, уникальный набор, вероятности решений и владельцы |
+| calc_strategy.py | Воронка, прогноз, экономика и календарь |
+| py tools/strateg.py check --final | Код 0. V01-V12 равны 0, нарушений 0. Системный py не нашёл зарегистрированный Python. Точная команда выполнена в созданном внутри копии окружении Python 3.11.0. Вывод |
+| Независимый пересчёт по входным допущениям | Календарь с временем суток, биномиальные вероятности, суммы по кварталам и границы |
 
 ## Повторная проверка 26 пунктов
 
