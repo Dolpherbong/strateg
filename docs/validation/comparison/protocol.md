@@ -12,7 +12,7 @@
 
 ## Объекты и обозначения
 
-A: `dev/runs/baseline-1/work/answer.md`, места обозначены номерами строк.
+A: `chat-answer.md`, места обозначены номерами строк.
 
 B: `dev/runs/run-1/strateg/projects/operator-n-travel/tasks/01-travel-esim/work/before-S18-*.md.txt`. Сокращения: св = summary, си = situation, оп = options, пр = product-strategy, ко = comms-strategy, пл = test-plan. Число после сокращения = строка. Число после точки = ячейка таблицы без технического разделителя. Вхождения перечислены через точку с запятой. Ссылки на C раскрываются через выводы situation и далее E, ссылки E через evidence и sources. Ссылки Q сами по себе обозначают вопрос и не дают внешнего адреса. Внутренние D, K и результаты выполнения работы исключены вместе с соответствующими утверждениями.
 
@@ -768,7 +768,7 @@ def check_counts(text: str) -> None:
 
 def main() -> None:
     """Run the audit report checks without writing any files."""
-    text = Path("dev/runs/compare-2-audit.md").read_text(encoding="utf-8")
+    text = Path("docs/validation/comparison/protocol.md").read_text(encoding="utf-8")
     check_samples(text)
     check_counts(text)
     for name, k in [("A, ссылки", 14), ("B, ссылки", 19),
